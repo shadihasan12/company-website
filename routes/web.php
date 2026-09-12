@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\SetLocale;
 use App\Support\Locale;
@@ -28,6 +29,9 @@ Route::prefix('{locale}')
         // not indexed; remove or gate before launch.
         Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
         Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+
+        Route::get('/work', [ProjectController::class, 'index'])->name('work.index');
+        Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
 
         Route::view('/styleguide', 'pages.styleguide')->name('styleguide');
     });

@@ -284,12 +284,19 @@ Still open: **starting prices** (every service currently reads "Priced per proje
 **ERP / Custom Systems decision** — both are advertised with no case study, so their Related work
 section is simply absent.
 
-### Epic 3 — Portfolio / case studies
+### Epic 3 — Portfolio / case studies ✅ **Complete**
 
-- **T3.1** Portfolio index with filtering by category + industry + tech
-- **T3.2** Case study detail template (problem → solution → stack → results → gallery → testimonial → next project)
-- **T3.3** Device mockup / screenshot gallery component with lightbox
-- **T3.4** App Store / Google Play / live-site link buttons
+- **T3.1** ✅ Index at `/{locale}/work` with service, industry and technology filters. Filtering is
+  server-side on query parameters, so a filtered view is a real shareable, indexable URL. Only facets
+  that would return results are offered; impossible combinations get an empty state with a reset.
+- **T3.2** ✅ Detail template: breadcrumb, hero, facts panel, results band with count-ups, problem →
+  solution → outcome, gallery, testimonial, clickable stack, next case study (wraps at the end), CTA.
+- **T3.3** ✅ Gallery with keyboard-driven lightbox (arrows, Escape, body scroll lock).
+  *Device mockup frames deferred — they need real screenshots to tune the aspect ratios.*
+- **T3.4** ✅ Website / App Store / Google Play buttons, each hidden when its URL is absent.
+
+Every case study currently hides its gallery, results and narrative sections, because that content
+does not exist yet. See [NEEDED.md](NEEDED.md).
 
 ### Epic 4 — Company
 

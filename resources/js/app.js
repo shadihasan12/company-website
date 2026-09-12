@@ -231,6 +231,47 @@ function initHero() {
 }
 
 /* -------------------------------------------------------------------------
+ * Lightbox
+ *
+ * Wraps an image gallery. Arrow keys and Escape are bound by the markup;
+ * this only owns the state and the body scroll lock.
+ * ---------------------------------------------------------------------- */
+
+Alpine.data('lightbox', (images = []) => ({
+    images,
+    isOpen: false,
+    current: 0,
+
+    open(index) {
+        this.current = index;
+        this.isOpen = true;
+        // Without this the page behind the overlay scrolls on arrow keys.
+        document.body.style.overflow = 'hidden';
+    },
+
+    close() {
+        if (!this.isOpen) return;
+
+        this.isOpen = false;
+        document.body.style.overflow = '';
+    },
+
+    next() {
+        if (!this.isOpen) return;
+
+        this.current = (this.current + 1) % this.images.length;
+    },
+
+    previous() {
+        if (!this.isOpen) return;
+
+        // Modulo on a negative index returns a negative in JS, so add the
+        // length before wrapping.
+        this.current = (this.current - 1 + this.images.length) % this.images.length;
+    },
+}));
+
+/* -------------------------------------------------------------------------
  * Boot
  * ---------------------------------------------------------------------- */
 
