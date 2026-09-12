@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use ArrayAccess;
 use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 use Stringable;
@@ -19,9 +20,13 @@ use Stringable;
  * Arabic is deferred but every translatable column already exists, so
  * enabling it is a content pass rather than a migration.
  *
+ * ArrayAccess is implemented so `data_get($model, 'title.en')` resolves —
+ * that is how the admin panel binds one form field per locale.
+ *
  * @implements Arrayable<string, string>
+ * @implements ArrayAccess<string, string|null>
  */
-class TranslatedText implements Arrayable, JsonSerializable, Stringable
+class TranslatedText implements Arrayable, ArrayAccess, JsonSerializable, Stringable
 {
     /**
      * @param  array<string, string|null>  $values
@@ -85,6 +90,26 @@ class TranslatedText implements Arrayable, JsonSerializable, Stringable
     public function jsonSerialize(): mixed
     {
         return $this->values;
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return isset($this->values[$offset]);
+    }
+
+    public function offsetGet(mixed $offset): ?string
+    {
+        return $this->values[$offset] ?? null;
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        $this->values[$offset] = $value;
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        unset($this->values[$offset]);
     }
 
     public function __toString(): string

@@ -234,8 +234,12 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
   pivots. Every public-facing text column is per-locale JSON, so Arabic needs a content pass rather
   than a migration. Seeded with the seven real projects from the CV.
   Also ships `php artisan content:audit`, which lists every gap blocking launch.
-- **T0.3 — Admin panel.** Filament v4 so you can add clients/projects/posts without me. Auth, roles,
-  media uploads, image conversions.
+- **T0.3 — Admin panel.** ✅ **Done.** Filament v5 at `/admin`, branded to the Clean Cody palette.
+  Resources for case studies, services, clients, testimonials, posts, industries, technologies and
+  leads. Translatable fields render one input per active locale and become tabs automatically when
+  Arabic is switched on. Dashboard widget mirrors `content:audit`.
+  Panel access is gated on `users.is_admin` — authentication alone is not enough.
+  Create an admin with `php artisan make:admin <email>`.
 
 ### Epic 1 — Homepage
 

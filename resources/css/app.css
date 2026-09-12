@@ -1,7 +1,11 @@
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+
+/* NOT sourced: storage/framework/views. Filament compiles its own Blade
+   views into that directory, which would pull the entire admin panel's
+   utility classes into the public stylesheet. Nothing on the public site
+   builds class names dynamically, so scanning resources/ is sufficient. */
 
 /* Dark mode is class-driven and dark-first: <html class="dark"> is the default. */
 @custom-variant dark (&:where(.dark, .dark *));
