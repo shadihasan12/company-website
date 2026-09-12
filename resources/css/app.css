@@ -1,0 +1,251 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/* Dark mode is class-driven and dark-first: <html class="dark"> is the default. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* ---------------------------------------------------------------
+       Typography
+       --------------------------------------------------------------- */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-arabic: 'IBM Plex Sans Arabic', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    /* ---------------------------------------------------------------
+       BRAND SOURCE COLORS  —  approximated from the supplied palette.
+       When the exact brand hexes arrive, replace these four values and
+       regenerate the scales below. Nothing else needs to change.
+       --------------------------------------------------------------- */
+    --color-brand-magenta: #f01fe0;
+    --color-brand-iris: #4b48bc;
+    --color-brand-violet: #7149b8;
+    --color-brand-navy: #2a2560;
+
+    /* Accent — magenta. The primary call-to-action colour. */
+    --color-accent-50: #fdeafc;
+    --color-accent-100: #fbd2f8;
+    --color-accent-200: #f7a6f1;
+    --color-accent-300: #f479ea;
+    --color-accent-400: #f24de4;
+    --color-accent-500: #f01fe0;
+    --color-accent-600: #c018b3;
+    --color-accent-700: #901287;
+    --color-accent-800: #600c5a;
+    --color-accent-900: #30062d;
+    --color-accent-950: #1b0319;
+
+    /* Brand — violet. Primary surface accent and gradient midpoint. */
+    --color-brand-50: #f2eefa;
+    --color-brand-100: #e4ddf5;
+    --color-brand-200: #c9bbeb;
+    --color-brand-300: #ae98e0;
+    --color-brand-400: #9376d6;
+    --color-brand-500: #7149b8;
+    --color-brand-600: #5b3b94;
+    --color-brand-700: #442c6f;
+    --color-brand-800: #2e1e4a;
+    --color-brand-900: #170f25;
+    --color-brand-950: #0d0815;
+
+    /* Iris — indigo. Secondary accent, links, focus rings. */
+    --color-iris-50: #eeedf9;
+    --color-iris-100: #dddbf3;
+    --color-iris-200: #bbb7e7;
+    --color-iris-300: #9a93db;
+    --color-iris-400: #786fcf;
+    --color-iris-500: #4b48bc;
+    --color-iris-600: #3c3a96;
+    --color-iris-700: #2d2b71;
+    --color-iris-800: #1e1d4b;
+    --color-iris-900: #0f0e26;
+    --color-iris-950: #080715;
+
+    /* Ink — navy-tinted neutrals. Every grey on the site comes from here
+       so the whole UI stays in the brand's colour temperature. */
+    --color-ink-50: #f6f6fa;
+    --color-ink-100: #ecebf4;
+    --color-ink-200: #d6d4e6;
+    --color-ink-300: #b0acc9;
+    --color-ink-400: #837ea3;
+    --color-ink-500: #5f5a80;
+    --color-ink-600: #454065;
+    --color-ink-700: #2a2560;
+    --color-ink-800: #1c1940;
+    --color-ink-900: #121029;
+    --color-ink-950: #0a0918;
+
+    /* ---------------------------------------------------------------
+       Motion
+       --------------------------------------------------------------- */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* -------------------------------------------------------------------
+   Semantic tokens. These map to runtime CSS variables that swap with
+   the theme, so `bg-surface` / `text-content` work in both modes with
+   no `dark:` variant needed at the call site.
+   ------------------------------------------------------------------- */
+@theme inline {
+    --color-surface: var(--surface);
+    --color-surface-raised: var(--surface-raised);
+    --color-surface-sunken: var(--surface-sunken);
+    --color-hairline: var(--hairline);
+    --color-content: var(--content);
+    --color-content-muted: var(--content-muted);
+    --color-content-subtle: var(--content-subtle);
+}
+
+/* Light theme */
+:root {
+    --surface: #ffffff;
+    --surface-raised: #f6f6fa;
+    --surface-sunken: #ecebf4;
+    --hairline: color-mix(in oklab, #2a2560 12%, transparent);
+    --content: #121029;
+    --content-muted: #454065;
+    --content-subtle: #837ea3;
+    color-scheme: light;
+}
+
+/* Dark theme — the default */
+.dark {
+    --surface: #0a0918;
+    --surface-raised: #121029;
+    --surface-sunken: #06050f;
+    --hairline: color-mix(in oklab, #b0acc9 14%, transparent);
+    --content: #f6f6fa;
+    --content-muted: #b0acc9;
+    --content-subtle: #837ea3;
+    color-scheme: dark;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        background-color: var(--surface);
+        color: var(--content);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Arabic typography. Latin display/body faces have no Arabic coverage,
+       so the whole document switches face when dir="rtl". */
+    [dir='rtl'] body,
+    [dir='rtl'] .font-display {
+        font-family: var(--font-arabic);
+    }
+
+    /* Arabic renders optically smaller at the same px size, and its
+       ascenders/descenders need more leading. */
+    [dir='rtl'] {
+        --arabic-scale: 1.06;
+        font-size: calc(1rem * var(--arabic-scale));
+        line-height: 1.85;
+    }
+
+    ::selection {
+        background-color: var(--color-accent-500);
+        color: #fff;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-accent-400);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+}
+
+@layer utilities {
+    /* Brand gradient: navy -> iris -> violet -> magenta, the full palette. */
+    .bg-brand-gradient {
+        background-image: linear-gradient(
+            135deg,
+            var(--color-brand-navy) 0%,
+            var(--color-brand-iris) 35%,
+            var(--color-brand-violet) 65%,
+            var(--color-brand-magenta) 100%
+        );
+    }
+
+    .text-brand-gradient {
+        background-image: linear-gradient(
+            110deg,
+            var(--color-brand-iris) 0%,
+            var(--color-brand-violet) 45%,
+            var(--color-brand-magenta) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* Glassmorphism panel. */
+    .glass {
+        background-color: color-mix(in oklab, var(--surface-raised) 55%, transparent);
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+        border: 1px solid var(--hairline);
+    }
+
+    /* Ambient glow behind hero / feature sections. Decorative only. */
+    .glow {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(96px);
+        opacity: 0.45;
+        pointer-events: none;
+    }
+
+    /* Hairline gradient border via mask — no extra DOM node. */
+    .ring-gradient {
+        position: relative;
+    }
+    .ring-gradient::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(
+            135deg,
+            var(--color-brand-iris),
+            var(--color-brand-magenta)
+        );
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    /* Set by GSAP before ScrollTrigger takes over, so content is not
+       invisible if JS fails or is still loading. */
+    .js-reveal {
+        will-change: transform, opacity;
+    }
+}
+
+/* Accessibility: honour the OS "reduce motion" setting everywhere. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
