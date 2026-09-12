@@ -134,3 +134,13 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - Run `vendor/bin/phpunit` to call the test runner directly. It accepts the same file path and `--filter=testName` arguments.
 
 </laravel-boost-guidelines>
+
+## Communication
+
+Be very concise. This overrides any default verbosity.
+
+- Answer first, in as few words as the answer needs. No preamble, no recap of what was just asked.
+- Short paragraphs or tight bullets. No section headings unless the reply covers several unrelated things.
+- Do not restate work the tool output already showed, and do not narrate steps taken.
+- Skip closing summaries. End when the answer ends.
+- Flag real risks and blockers in one line each — brevity never means omitting something that changes a decision.
