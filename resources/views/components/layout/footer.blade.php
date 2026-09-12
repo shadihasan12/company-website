@@ -1,7 +1,5 @@
 @php
-    use Illuminate\Support\Facades\Route as RouteFacade;
-
-    $link = fn (string $name) => RouteFacade::has($name) ? route($name) : '#';
+    use App\Support\Nav;
 
     $services = config('site.services');
     $contact = config('site.contact');
@@ -59,7 +57,7 @@
                 <ul class="mt-4 flex flex-col gap-2.5">
                     @foreach ($services as $service)
                         <li>
-                            <a href="{{ $link('services.show') }}" class="text-sm text-content-muted transition-colors hover:text-accent-400">
+                            <a href="{{ Nav::link('services.show') }}" class="text-sm text-content-muted transition-colors hover:text-accent-400">
                                 {{ __("services.{$service['key']}.title") }}
                             </a>
                         </li>
@@ -74,7 +72,7 @@
                 <ul class="mt-4 flex flex-col gap-2.5">
                     @foreach ($companyLinks as $item)
                         <li>
-                            <a href="{{ $link($item['route']) }}" class="text-sm text-content-muted transition-colors hover:text-accent-400">
+                            <a href="{{ Nav::link($item['route']) }}" class="text-sm text-content-muted transition-colors hover:text-accent-400">
                                 {{ $item['label'] }}
                             </a>
                         </li>
@@ -123,10 +121,10 @@
             </p>
 
             <div class="flex items-center gap-5">
-                <a href="{{ $link('privacy') }}" class="text-xs text-content-subtle transition-colors hover:text-content">
+                <a href="{{ Nav::link('privacy') }}" class="text-xs text-content-subtle transition-colors hover:text-content">
                     {{ __('footer.privacy') }}
                 </a>
-                <a href="{{ $link('terms') }}" class="text-xs text-content-subtle transition-colors hover:text-content">
+                <a href="{{ Nav::link('terms') }}" class="text-xs text-content-subtle transition-colors hover:text-content">
                     {{ __('footer.terms') }}
                 </a>
             </div>

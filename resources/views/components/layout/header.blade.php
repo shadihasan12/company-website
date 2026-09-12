@@ -1,9 +1,5 @@
 @php
-    use Illuminate\Support\Facades\Route as RouteFacade;
-
-    // Pages arrive in later epics. Until their routes exist the link is
-    // inert rather than broken, and lights up automatically once defined.
-    $link = fn (string $name) => RouteFacade::has($name) ? route($name) : '#';
+    use App\Support\Nav;
 
     $primaryNav = [
         ['label' => __('nav.work'), 'route' => 'work.index'],
@@ -69,7 +65,7 @@
                             <div class="grid grid-cols-2 gap-1">
                                 @foreach ($services as $service)
                                     <a
-                                        href="{{ $link('services.show') }}"
+                                        href="{{ Nav::link('services.show') }}"
                                         class="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-surface-raised"
                                     >
                                         <span class="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-brand-500/12 text-brand-300 transition-colors group-hover:bg-accent-500/15 group-hover:text-accent-400">
@@ -92,7 +88,7 @@
 
                 @foreach ($primaryNav as $item)
                     <a
-                        href="{{ $link($item['route']) }}"
+                        href="{{ Nav::link($item['route']) }}"
                         class="inline-flex h-10 items-center rounded-full px-4 text-sm font-medium text-content-muted transition-colors hover:bg-surface-raised hover:text-content"
                     >
                         {{ $item['label'] }}
@@ -104,7 +100,7 @@
             <div class="hidden items-center gap-1 lg:flex">
                 <x-ui.language-switcher />
                 <x-ui.theme-toggle />
-                <x-ui.button :href="$link('contact')" size="sm" class="ms-2">
+                <x-ui.button :href="Nav::contact()" size="sm" class="ms-2">
                     {{ __('common.cta_primary') }}
                 </x-ui.button>
             </div>
@@ -143,7 +139,7 @@
 
                 @foreach ($services as $service)
                     <a
-                        href="{{ $link('services.show') }}"
+                        href="{{ Nav::link('services.show') }}"
                         class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-content-muted transition-colors hover:bg-surface-raised hover:text-content"
                     >
                         <x-ui.icon :name="$service['icon']" size="size-5" class="text-brand-300" />
@@ -155,7 +151,7 @@
 
                 @foreach ($primaryNav as $item)
                     <a
-                        href="{{ $link($item['route']) }}"
+                        href="{{ Nav::link($item['route']) }}"
                         class="rounded-xl px-3 py-2.5 text-sm font-medium text-content-muted transition-colors hover:bg-surface-raised hover:text-content"
                     >
                         {{ $item['label'] }}
@@ -164,7 +160,7 @@
 
                 <div class="mt-4 flex items-center justify-between gap-3">
                     <x-ui.language-switcher />
-                    <x-ui.button :href="$link('contact')" size="sm" class="grow">
+                    <x-ui.button :href="Nav::contact()" size="sm" class="grow">
                         {{ __('common.cta_primary') }}
                     </x-ui.button>
                 </div>

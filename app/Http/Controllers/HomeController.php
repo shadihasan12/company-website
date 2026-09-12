@@ -11,6 +11,9 @@ class HomeController extends Controller
     public function __invoke(): View
     {
         return view('pages.home', [
+            // Counted rather than hardcoded so the hero's claim can never
+            // drift away from what the portfolio actually contains.
+            'shippedCount' => Project::published()->count(),
             'services' => Service::published()->ordered()->get(),
             'featuredProjects' => Project::published()
                 ->featured()

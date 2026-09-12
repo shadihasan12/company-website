@@ -169,6 +169,68 @@ function initCountUps() {
 }
 
 /* -------------------------------------------------------------------------
+ * Hero
+ *
+ * Two rules govern everything here:
+ *
+ *   1. The h1 is the LCP element and is never faded in. An element at
+ *      opacity 0 does not count as painted, so a fade would delay LCP by
+ *      the full duration of the animation. It moves on transform only.
+ *   2. The ambient background animates transform and nothing else, so it
+ *      stays on the compositor and never triggers layout or paint.
+ * ---------------------------------------------------------------------- */
+
+function initHero() {
+    const hero = document.querySelector('[data-hero]');
+    if (!hero || prefersReducedMotion) return;
+
+    const headline = hero.querySelector('[data-hero-headline]');
+    const items = hero.querySelectorAll('[data-hero-item]');
+
+    const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+    if (headline) {
+        // Transform only — no opacity. See rule 1 above.
+        intro.from(headline, { y: 18, duration: 0.9 });
+    }
+
+    if (items.length) {
+        intro.from(
+            items,
+            { opacity: 0, y: 20, duration: 0.7, stagger: 0.07 },
+            headline ? '-=0.65' : 0,
+        );
+    }
+
+    // Orbit rings. The attribute carries the period in seconds; a negative
+    // value reverses direction so the rings never move as one block.
+    hero.querySelectorAll('[data-hero-orbit]').forEach((orbit) => {
+        const period = parseFloat(orbit.dataset.heroOrbit) || 40;
+
+        gsap.to(orbit, {
+            rotation: period > 0 ? 360 : -360,
+            duration: Math.abs(period),
+            repeat: -1,
+            ease: 'none',
+            transformOrigin: 'center center',
+        });
+    });
+
+    // Slow independent drift so the glows never settle into a static image.
+    hero.querySelectorAll('[data-hero-glow]').forEach((glow, index) => {
+        gsap.to(glow, {
+            xPercent: gsap.utils.random(-12, 12),
+            yPercent: gsap.utils.random(-10, 10),
+            duration: gsap.utils.random(14, 22),
+            delay: index * 0.6,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+        });
+    });
+}
+
+/* -------------------------------------------------------------------------
  * Boot
  * ---------------------------------------------------------------------- */
 
@@ -179,6 +241,10 @@ Alpine.start();
 // Wait for fonts before measuring scroll positions: a late font swap shifts
 // layout and would leave ScrollTrigger with stale start/end values.
 const ready = document.fonts?.ready ?? Promise.resolve();
+
+// The hero animates immediately rather than waiting on fonts: it is
+// above the fold and a late start would be visible.
+initHero();
 
 ready.then(() => {
     initReveal();

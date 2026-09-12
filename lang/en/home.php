@@ -1,11 +1,17 @@
 <?php
 
 return [
-    'eyebrow' => 'Foundation in place',
-    'headline' => 'We build software that carries real weight.',
-    'subhead' => 'Mobile apps, web platforms, dashboards, ERP and AI systems — shipped to stores, to production, and to real users.',
-    'shell_note' => 'This is the T0.1/T0.2 shell. The designed homepage is built in Epic 1.',
-    'view_styleguide' => 'View the styleguide',
+    'hero' => [
+        'eyebrow' => 'Mobile · Web · AI · ERP',
+        // Two parts so the second can carry the brand gradient.
+        'headline_lead' => 'We build software',
+        'headline_accent' => 'that ships.',
+        'subhead' => 'Mobile apps, web platforms, dashboards, ERP and AI systems — engineered end to end, taken through App Store and Play Store review, and running in production for real users.',
+        'primary_cta' => 'Start a project',
+        'secondary_cta' => 'See our work',
+        'proof' => ':count products shipped and live',
+        'scroll' => 'Scroll',
+    ],
 
     'services_title' => 'Services',
     'services_note' => 'Seeded from the database. Edit these from the admin panel once T0.3 ships.',
