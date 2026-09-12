@@ -259,7 +259,9 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
   computed from real records; clients, rating, uptime and NPS come from `config('site.stats')` and are
   omitted entirely while unset. The band hides below two figures — one lonely statistic reads worse
   than none.
-- **T1.6** "How we work" process timeline
+- **T1.6** ✅ **Done.** Six-step process timeline with a gradient rail, driven by
+  `config('site.process')` — reorder or trim the array to change it. Copy is a first draft in
+  `lang/en/home.php` under `process.steps`; **rewrite it in your own words.**
 - **T1.7** Tech stack strip
 - **T1.8** Testimonials carousel
 - **T1.9** Industries we serve

@@ -8,4 +8,6 @@
     <x-sections.work :projects="$featuredProjects" />
 
     <x-sections.stats :stats="$stats" />
+
+    <x-sections.process />
 </x-layouts.app>

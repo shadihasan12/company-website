@@ -14,7 +14,9 @@ These determine whether the site is real or a mockup.
 
 - [ ] **T1.5** Real numbers: projects delivered, clients, years operating, app rating, uptime.
       *No headcount — the site references neither team nor team size.*
-- [ ] **T1.6** Your delivery process in your own words (discovery → design → build → QA → launch → support)
+- [ ] **T1.6** Your delivery process in your own words. A six-step draft is live
+      (Discovery → Design → Build → Quality → Release → Support) in `lang/en/home.php`
+      under `process.steps` — read it and correct anything that is not how you actually work.
 - [ ] **T1.8** 2–3 real testimonials: quote + name + title + company (+ photo if possible).
       Deliberately never invented — fabricated social proof on a live site is a liability.
 - [ ] **T1.9** Which industries you want to target

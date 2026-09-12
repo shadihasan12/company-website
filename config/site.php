@@ -142,6 +142,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Delivery process
+    |--------------------------------------------------------------------------
+    |
+    | Keys resolve to `lang/{locale}/home.php` under `process.steps`, so the
+    | wording lives with the rest of the copy. Reorder or trim this list to
+    | change the timeline.
+    |
+    */
+
+    'process' => [
+        ['key' => 'discovery', 'icon' => 'magnifier'],
+        ['key' => 'design', 'icon' => 'pencil'],
+        ['key' => 'build', 'icon' => 'code'],
+        ['key' => 'quality', 'icon' => 'beaker'],
+        ['key' => 'release', 'icon' => 'rocket'],
+        ['key' => 'support', 'icon' => 'lifebuoy'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Services
     |--------------------------------------------------------------------------
     |
