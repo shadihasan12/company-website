@@ -19,7 +19,7 @@
                 @foreach ($industries as $industry)
                     <li>
                         <a
-                            href="{{ Nav::link('work.index', '#work') }}"
+                            href="{{ route('work.index', ['industry' => $industry->slug]) }}"
                             class="group flex h-full flex-col items-center gap-3 rounded-2xl bg-surface p-6 text-center ring-1 ring-hairline transition-all duration-300 ease-out-expo hover:-translate-y-1 hover:ring-brand-400/40"
                         >
                             <span class="grid size-11 place-items-center rounded-xl bg-brand-500/12 text-brand-300 transition-colors duration-300 group-hover:bg-accent-500/15 group-hover:text-accent-400">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CaptureLead;
 use App\Http\Requests\StoreScopeRequest;
-use App\Models\Service;
+use App\Support\Nav;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -13,7 +13,7 @@ class ScopeController extends Controller
     public function show(): View
     {
         return view('pages.scope', [
-            'services' => Service::published()->ordered()->get(),
+            'services' => Nav::services(),
         ]);
     }
 

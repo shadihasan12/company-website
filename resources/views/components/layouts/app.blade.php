@@ -7,6 +7,7 @@
 ])
 
 @php
+    use App\Support\Fonts;
     use App\Support\Locale;
     use App\Support\Seo;
 
@@ -20,9 +21,13 @@
     // The Arabic face is ~90KB and is only needed on RTL pages, so it is
     // requested only there. Latin faces load everywhere — Arabic pages still
     // render Latin brand names, tech terms and numerals.
-    $fontAliases = Locale::isRtl()
+    //
+    // Filtered against what was actually built: the Arabic family is
+    // commented out of vite.config.js while the locale is off, and asking
+    // @fonts for a family it does not know throws.
+    $fontAliases = Fonts::available(Locale::isRtl()
         ? ['inter', 'space-grotesk', 'ibm-plex-sans-arabic']
-        : ['inter', 'space-grotesk'];
+        : ['inter', 'space-grotesk']);
 @endphp
 
 <!DOCTYPE html>

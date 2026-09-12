@@ -36,8 +36,14 @@ return [
     |
     | Arabic is deferred. The RTL machinery stays in place — logical CSS
     | properties, direction-aware animations, `lang/ar/*`, the switcher and
-    | the font-loading split — so enabling it later is this one entry plus a
-    | content pass. Do NOT strip that work out; re-adding it is expensive.
+    | the font-loading split — so enabling it later is a content pass, not a
+    | rebuild. Do NOT strip that work out; re-adding it is expensive.
+    |
+    | To switch Arabic on:
+    |   1. Uncomment the `ar` entry below.
+    |   2. Uncomment the IBM Plex Sans Arabic block in vite.config.js and
+    |      rebuild. Without this the site still works, but Arabic renders in
+    |      the Latin fallback face.
     |
     */
 

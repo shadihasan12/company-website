@@ -39,6 +39,10 @@ class LaunchCheck extends Command
         $this->checkAssets();
 
         $this->newLine();
+        $this->components->info('Legal');
+        $this->checkLegal();
+
+        $this->newLine();
         $this->components->info('Content');
         $this->checkContent();
 
@@ -104,6 +108,40 @@ class LaunchCheck extends Command
         );
 
         $this->assert('Built assets present', file_exists(public_path('build/manifest.json')));
+    }
+
+    /**
+     * The privacy policy and terms describe what the software does
+     * accurately, but they are not legal advice and ship with placeholders
+     * that must be replaced.
+     */
+    protected function checkLegal(): void
+    {
+        foreach (array_keys(config('site.locales')) as $locale) {
+            $path = lang_path("{$locale}/legal.php");
+
+            if (! file_exists($path)) {
+                $this->assert("Legal copy exists for [{$locale}]", false);
+
+                continue;
+            }
+
+            $contents = file_get_contents($path) ?: '';
+            $markers = [];
+
+            foreach (['TODO-LEGAL-REVIEW', 'TODO-GOVERNING-LAW'] as $marker) {
+                if (str_contains($contents, $marker)) {
+                    $markers[] = $marker;
+                }
+            }
+
+            $this->assert(
+                $markers === []
+                    ? "Legal copy reviewed [{$locale}]"
+                    : 'Legal copy still contains '.implode(', ', $markers)." [{$locale}]",
+                $markers === [],
+            );
+        }
     }
 
     protected function checkContent(): void

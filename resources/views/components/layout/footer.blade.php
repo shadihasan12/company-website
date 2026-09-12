@@ -64,7 +64,7 @@
                 <ul class="mt-4 flex flex-col gap-2.5">
                     @foreach ($services as $service)
                         <li>
-                            <a href="{{ Nav::link('services.show', '#', $service->slug) }}" class="text-sm text-content-muted transition-colors hover:text-accent-400">
+                            <a href="{{ route('services.show', $service->slug) }}" class="text-sm text-content-muted transition-colors hover:text-accent-400">
                                 {{ $service->title }}
                             </a>
                         </li>

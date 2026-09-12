@@ -20,10 +20,27 @@ class SiteStats
      */
     public static function all(): Collection
     {
+        return PerRequest::remember('site.stats', fn () => static::compute());
+    }
+
+    /**
+     * @return Collection<int, array{key: string, value: float|int, decimals: int, suffix: string}>
+     */
+    protected static function compute(): Collection
+    {
         return collect([
             ...static::computed(),
             ...static::configured(),
         ])->values();
+    }
+
+    /**
+     * Published case studies, memoised because the hero and the stats band
+     * both need the same figure on the homepage.
+     */
+    public static function publishedProjects(): int
+    {
+        return PerRequest::remember('site.published-projects', fn () => Project::published()->count());
     }
 
     /**
@@ -33,7 +50,7 @@ class SiteStats
     {
         $stats = [];
 
-        if ($shipped = Project::published()->count()) {
+        if ($shipped = static::publishedProjects()) {
             $stats[] = static::stat('projects', $shipped, suffix: '');
         }
 

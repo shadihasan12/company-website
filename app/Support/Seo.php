@@ -127,6 +127,16 @@ class Seo
      */
     public static function aggregateRating(): ?array
     {
+        // Memoised: the Organization node is emitted on every page, and
+        // this otherwise costs a count and an average each time.
+        return PerRequest::remember('seo.aggregate-rating', fn () => static::computeAggregateRating());
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    protected static function computeAggregateRating(): ?array
+    {
         $rated = Testimonial::whereNotNull('rating');
         $count = $rated->count();
 

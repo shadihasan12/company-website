@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Service;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 class Nav
@@ -28,10 +29,23 @@ class Nav
 
         try {
             return route($name, $parameters);
-        } catch (UrlGenerationException) {
-            // The route exists but required parameters were not supplied —
-            // a nav link to a detail page, for instance. Fall back rather
-            // than take the page down.
+        } catch (UrlGenerationException $exception) {
+            // The route exists but required parameters were missing. That
+            // is a programming mistake, not a page that has not shipped
+            // yet, and silently falling back hides it: every service and
+            // case study card on the homepage once pointed at an anchor
+            // because of exactly this. Fail loudly in development; in
+            // production degrade rather than take the page down, but leave
+            // a trace.
+            if (config('app.debug')) {
+                throw $exception;
+            }
+
+            Log::warning('Nav::link fell back on a missing route parameter', [
+                'route' => $name,
+                'parameters' => $parameters,
+            ]);
+
             return $fallback;
         }
     }
@@ -42,16 +56,14 @@ class Nav
      * Read from the database rather than config so unpublishing a service
      * removes it from the menu too.
      *
-     * Deliberately not memoised with once(): a static call site caches for
-     * the life of the process, which goes stale across requests under
-     * Octane and inside tests. Seven indexed rows twice per page is not
-     * worth that class of bug.
+     * Memoised per request — the header, the footer and often the page
+     * itself all need the same rows.
      *
      * @return Collection<int, Service>
      */
     public static function services(): Collection
     {
-        return Service::published()->ordered()->get();
+        return PerRequest::remember('nav.services', fn () => Service::published()->ordered()->get());
     }
 
     /**
@@ -62,7 +74,7 @@ class Nav
      */
     public static function hasPosts(): bool
     {
-        return Post::published()->exists();
+        return PerRequest::remember('nav.has-posts', fn () => Post::published()->exists());
     }
 
     /** The best available way for a visitor to start a conversation. */

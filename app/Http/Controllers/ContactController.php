@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CaptureLead;
 use App\Http\Requests\StoreLeadRequest;
-use App\Models\Service;
+use App\Support\Nav;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class ContactController extends Controller
     public function show(Request $request): View
     {
         return view('pages.contact', [
-            'services' => Service::published()->ordered()->get(),
+            'services' => Nav::services(),
             // Pre-selects the service when arriving from a service page.
             'selectedService' => $request->query('service'),
         ]);

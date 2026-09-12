@@ -403,7 +403,10 @@ an empty page. Run `php artisan db:seed --class=DemoContentSeeder` to see the de
 
 ## Status
 
-All nine epics complete. 202 tests passing. JS 64.7KB / CSS 10.7KB gzipped, against a 150KB budget.
+All nine epics complete, plus a full audit pass. 243 tests passing. JS 64.7KB / CSS 10.7KB gzipped, against a 150KB budget.
+
+Privacy and terms pages are live (required — the site collects personal data) and
+`launch:check` blocks until their legal review markers are removed.
 
 What remains is content and credentials, not code — see [NEEDED.md](NEEDED.md), and run
 `php artisan launch:check` and `php artisan content:audit` for the live picture.

@@ -4,6 +4,15 @@ Live status of content gaps: `php artisan content:audit`.
 Nothing here blocks building — every section ships with a placeholder or hides itself.
 These determine whether the site is real or a mockup.
 
+## Legal — **required before launch**
+
+`php artisan launch:check` blocks until these are done.
+
+- [ ] **Have a lawyer review `lang/en/legal.php`.** The privacy policy accurately describes what the
+      site collects, but it is not legal advice. Remove the `TODO-LEGAL-REVIEW` marker once reviewed.
+- [ ] **Governing law** for the terms of use — replace `TODO-GOVERNING-LAW`.
+- [ ] Company registration details, if your jurisdiction requires them on the site.
+
 ## Brand
 
 - [ ] Logo SVG → drop at `public/images/logo-mark.svg`, picked up automatically

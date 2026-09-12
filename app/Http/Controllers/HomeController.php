@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Industry;
 use App\Models\Project;
-use App\Models\Service;
 use App\Models\Technology;
 use App\Models\Testimonial;
+use App\Support\Nav;
 use App\Support\SiteStats;
 use Illuminate\Contracts\View\View;
 
@@ -18,8 +18,10 @@ class HomeController extends Controller
         return view('pages.home', [
             // Counted rather than hardcoded so the hero's claim can never
             // drift away from what the portfolio actually contains.
-            'shippedCount' => Project::published()->count(),
-            'services' => Service::published()->ordered()->get(),
+            'shippedCount' => SiteStats::publishedProjects(),
+            // Nav::services() rather than a fresh query: the header and
+            // footer already load exactly these rows.
+            'services' => Nav::services(),
             // Named clients only. The strip falls back to a wordmark until
             // a logo file is uploaded.
             'clients' => Client::named()->ordered()->get(),

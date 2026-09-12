@@ -15,7 +15,7 @@
             </x-ui.section-heading>
 
             <x-ui.button
-                :href="Nav::link('services.index', '#services')"
+                :href="route('services.index')"
                 variant="secondary"
                 icon="arrow-right"
                 class="shrink-0"
@@ -27,7 +27,7 @@
 
         <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>
             @foreach ($services as $service)
-                <x-ui.card :href="Nav::link('services.show', '#services')">
+                <x-ui.card :href="route('services.show', $service->slug)">
                     <span class="grid size-12 place-items-center rounded-xl bg-brand-500/12 text-brand-300 transition-colors duration-300 group-hover:bg-accent-500/15 group-hover:text-accent-400">
                         <x-ui.icon :name="$service->icon" size="size-6" />
                     </span>

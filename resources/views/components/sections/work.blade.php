@@ -16,7 +16,7 @@
                 </x-ui.section-heading>
 
                 <x-ui.button
-                    :href="Nav::link('work.index', '#work')"
+                    :href="route('work.index')"
                     variant="secondary"
                     icon="arrow-right"
                     class="shrink-0"

@@ -14,7 +14,7 @@
     ]);
 @endphp
 
-<x-ui.card :href="Nav::link('work.show', '#work')" class="p-5">
+<x-ui.card :href="route('work.show', $project->slug)" class="p-5">
     <x-ui.project-thumb :project="$project" />
 
     <div class="mt-5 flex flex-wrap items-center gap-2">
