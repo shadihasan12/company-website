@@ -298,12 +298,20 @@ section is simply absent.
 Every case study currently hides its gallery, results and narrative sections, because that content
 does not exist yet. See [NEEDED.md](NEEDED.md).
 
-### Epic 4 — Company
+### Epic 4 — Company ✅ **Complete**
 
-- **T4.1** About page (story, milestones timeline, values, real photos)
+- **T4.1** ✅ About page: story, values, stats, process, client strip and CTA.
+  The **milestones timeline is hidden** — no real company milestones were supplied, and inventing a
+  founding story would be fabrication. Add entries to `config('site.about.milestones')` and it appears.
+  *Real photos still outstanding.*
 - ~~**T4.2** Team page~~ — *deferred at the client's request; the site does not
   reference the team or team size anywhere.*
-- **T4.3** Careers page + application form *(optional)*
+- **T4.3** ✅ Careers page and open application form, **switched off by default**. The client has not
+  said whether they are hiring, and a careers page with no roles behind it is worse than none. Set
+  `CAREERS_ENABLED=true` to publish it; the route is not even registered otherwise, so it cannot
+  appear in navigation or a sitemap. Applications capture into `leads` with source `career`.
+  *Asks for a portfolio link rather than a CV upload — accepting arbitrary documents from the public
+  internet is a security surface this site does not need yet.*
 
 ### Epic 5 — Lead capture ✅ **Complete**
 

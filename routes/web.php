@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CareersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
@@ -35,6 +37,17 @@ Route::prefix('{locale}')
 
         Route::get('/work', [ProjectController::class, 'index'])->name('work.index');
         Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
+
+        Route::get('/about', AboutController::class)->name('about');
+
+        // Registered only while hiring is switched on, so the link never
+        // appears in the navigation or the sitemap when it should not.
+        if (config('site.careers.enabled')) {
+            Route::get('/careers', [CareersController::class, 'show'])->name('careers');
+            Route::post('/careers', [CareersController::class, 'store'])
+                ->middleware('throttle:6,1')
+                ->name('careers.store');
+        }
 
         Route::get('/contact', [ContactController::class, 'show'])->name('contact');
         Route::get('/contact/thank-you', [ContactController::class, 'thanks'])->name('contact.thanks');

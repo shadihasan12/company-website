@@ -13,7 +13,15 @@
         ['label' => __('nav.work'), 'route' => 'work.index'],
         ['label' => __('nav.insights'), 'route' => 'posts.index'],
         ['label' => __('nav.contact'), 'route' => 'contact'],
+        ['label' => __('careers.title'), 'route' => 'careers'],
     ];
+
+    // Drop entries whose route is not registered — careers, for instance,
+    // only exists while hiring is switched on.
+    $companyLinks = array_values(array_filter(
+        $companyLinks,
+        fn (array $item) => \Illuminate\Support\Facades\Route::has($item['route']),
+    ));
 @endphp
 
 <footer class="relative overflow-hidden border-t border-hairline bg-surface-sunken">

@@ -168,6 +168,50 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | About
+    |--------------------------------------------------------------------------
+    |
+    | `values` keys resolve to lang/{locale}/about.php.
+    |
+    | `milestones` is empty on purpose. Real company milestones have not
+    | been supplied, and inventing a founding story would be fabrication,
+    | so the timeline section hides itself until entries are added:
+    |
+    |     ['year' => 2021, 'key' => 'founded'],
+    |
+    | with the copy under `about.milestones.founded` in the lang files.
+    |
+    */
+
+    'about' => [
+        'values' => [
+            ['key' => 'ship', 'icon' => 'rocket'],
+            ['key' => 'ownership', 'icon' => 'shield'],
+            ['key' => 'clarity', 'icon' => 'magnifier'],
+            ['key' => 'handover', 'icon' => 'code'],
+        ],
+
+        'milestones' => [],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Careers
+    |--------------------------------------------------------------------------
+    |
+    | Off by default. The client has not said whether they are hiring, and
+    | a careers page with no roles and no intent behind it is worse than
+    | none. Set CAREERS_ENABLED=true to publish the page and its open
+    | application form, which captures into `leads` with source "career".
+    |
+    */
+
+    'careers' => [
+        'enabled' => env('CAREERS_ENABLED', false),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Scoping wizard
     |--------------------------------------------------------------------------
     |

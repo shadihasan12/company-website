@@ -21,6 +21,16 @@ These determine whether the site is real or a mockup.
       Deliberately never invented — fabricated social proof on a live site is a liability.
 - [ ] **T1.9** Which industries you want to target
 
+## About page (Epic 4)
+
+- [ ] **Your real story.** A three-paragraph draft is live in `lang/en/about.php` — rewrite it.
+- [ ] **Values.** Four are drafted (`about.values`). Confirm or replace.
+- [ ] **Milestones.** The timeline is hidden because none were supplied. Send year + one line each
+      and add them to `config('site.about.milestones')`.
+- [ ] **Real photos** of the office or the work. Research is clear that one authentic photo beats
+      ten stock images.
+- [ ] **Are you hiring?** Careers is built but switched off. `CAREERS_ENABLED=true` publishes it.
+
 ## Services (Epic 2)
 
 Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend & cloud:
