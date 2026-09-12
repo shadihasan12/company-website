@@ -26,6 +26,16 @@ class SetLocale
         app()->setLocale($locale);
         URL::defaults(['locale' => $locale]);
 
+        // Drop the locale from the route's parameters once it has been
+        // consumed.
+        //
+        // Laravel dispatches controller actions with the route parameters
+        // positionally. Because `{locale}` is the first segment, a method
+        // like `show(Service $service)` would otherwise receive the string
+        // "en" as its first argument. URL generation is unaffected: the
+        // URL::defaults() call above supplies the locale to route().
+        $request->route()->forgetParameter('locale');
+
         return $next($request);
     }
 }

@@ -272,11 +272,17 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
 - **T1.10** ✅ **Done.** Closing CTA band with gradient ring, orbit glows, primary CTA and WhatsApp.
   *Named contact person dropped — the site references no individuals.*
 
-### Epic 2 — Services
+### Epic 2 — Services ✅ **Complete**
 
-- **T2.1** Services index page
-- **T2.2** Service detail template (hero, what's included, process, stack, pricing, related work, FAQ + FAQ schema, CTA)
-- **T2.3** Content pass for all 7 services
+- **T2.1** ✅ Services index at `/{locale}/services`, driven by the database.
+- **T2.2** ✅ Detail template: breadcrumb, hero, engagement facts panel (timeline + pricing), overview,
+  what's included, process, stack, related work, FAQ accordion with `FAQPage` JSON-LD, other services, CTA.
+- **T2.3** ✅ Full draft copy for all seven services — body, timeline, 5–7 inclusions and 2–4 FAQs each —
+  in `lang/en/services.php`, seeded to the database and editable in the admin panel.
+
+Still open: **starting prices** (every service currently reads "Priced per project") and the
+**ERP / Custom Systems decision** — both are advertised with no case study, so their Related work
+section is simply absent.
 
 ### Epic 3 — Portfolio / case studies
 

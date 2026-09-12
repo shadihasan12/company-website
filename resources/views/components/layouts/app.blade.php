@@ -62,6 +62,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{ $head ?? '' }}
+    @stack('schema')
 </head>
 <body class="min-h-dvh antialiased">
     <x-layout.header />

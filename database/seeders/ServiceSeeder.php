@@ -14,6 +14,7 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         $locales = array_keys(config('site.locales'));
+        $fallback = config('site.fallback_locale');
 
         foreach (config('site.services') as $index => $service) {
             $key = $service['key'];
@@ -25,6 +26,12 @@ class ServiceSeeder extends Seeder
                     'title' => $this->translate("services.{$key}.title", $locales),
                     'tagline' => $this->translate("services.{$key}.tagline", $locales),
                     'excerpt' => $this->translate("services.{$key}.excerpt", $locales),
+                    'body' => $this->translate("services.{$key}.body", $locales),
+                    'timeline' => $this->translate("services.{$key}.timeline", $locales),
+                    // Lists are stored in the fallback locale only for now;
+                    // translating them is part of enabling Arabic.
+                    'inclusions' => __("services.{$key}.inclusions", locale: $fallback),
+                    'faqs' => __("services.{$key}.faqs", locale: $fallback),
                     'icon' => $service['icon'],
                     'is_published' => true,
                     'sort_order' => $index,

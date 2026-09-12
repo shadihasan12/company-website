@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\SetLocale;
 use App\Support\Locale;
 use Illuminate\Support\Facades\Route;
@@ -25,5 +26,8 @@ Route::prefix('{locale}')
 
         // Internal reference for the design system. Not linked publicly and
         // not indexed; remove or gate before launch.
+        Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+        Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+
         Route::view('/styleguide', 'pages.styleguide')->name('styleguide');
     });

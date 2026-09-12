@@ -8,7 +8,7 @@
         ['label' => __('nav.insights'), 'route' => 'posts.index'],
     ];
 
-    $services = config('site.services');
+    $services = Nav::services();
 @endphp
 
 <a
@@ -65,18 +65,18 @@
                             <div class="grid grid-cols-2 gap-1">
                                 @foreach ($services as $service)
                                     <a
-                                        href="{{ Nav::link('services.show') }}"
+                                        href="{{ Nav::link('services.show', '#', $service->slug) }}"
                                         class="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-surface-raised"
                                     >
                                         <span class="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-brand-500/12 text-brand-300 transition-colors group-hover:bg-accent-500/15 group-hover:text-accent-400">
-                                            <x-ui.icon :name="$service['icon']" size="size-5" />
+                                            <x-ui.icon :name="$service->icon" size="size-5" />
                                         </span>
                                         <span class="min-w-0">
                                             <span class="block text-sm font-medium text-content">
-                                                {{ __("services.{$service['key']}.title") }}
+                                                {{ $service->title }}
                                             </span>
                                             <span class="block text-xs text-content-subtle">
-                                                {{ __("services.{$service['key']}.tagline") }}
+                                                {{ $service->tagline }}
                                             </span>
                                         </span>
                                     </a>
@@ -139,11 +139,11 @@
 
                 @foreach ($services as $service)
                     <a
-                        href="{{ Nav::link('services.show') }}"
+                        href="{{ Nav::link('services.show', '#', $service->slug) }}"
                         class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-content-muted transition-colors hover:bg-surface-raised hover:text-content"
                     >
-                        <x-ui.icon :name="$service['icon']" size="size-5" class="text-brand-300" />
-                        <span class="text-sm font-medium">{{ __("services.{$service['key']}.title") }}</span>
+                        <x-ui.icon :name="$service->icon" size="size-5" class="text-brand-300" />
+                        <span class="text-sm font-medium">{{ $service->title }}</span>
                     </a>
                 @endforeach
 

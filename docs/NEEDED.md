@@ -25,9 +25,10 @@ These determine whether the site is real or a mockup.
 
 Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend & cloud:
 
-- [ ] What's included (4–6 bullets)
-- [ ] Typical timeline
-- [ ] Starting price, a range, or "request a quote"
+- [x] ~~What's included~~ — drafted, 5–7 bullets each. **Review and correct.**
+- [x] ~~Typical timeline~~ — drafted. **Review and correct.**
+- [ ] **Starting price or range.** Every page currently reads "Priced per project". Showing a figure
+      filters out time-wasters and raises qualified enquiries.
 - [ ] **Decision needed:** ERP and Custom Systems have zero case studies behind them.
       Send covering work, drop the service, or present it as a capability-only page.
 
