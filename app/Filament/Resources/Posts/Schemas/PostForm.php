@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Posts\Schemas;
 use App\Filament\Support\Translatable;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
@@ -29,6 +30,9 @@ class PostForm
             Section::make('Publishing')
                 ->columns(2)
                 ->schema([
+                    Select::make('category')
+                        ->options(collect(config('site.post_categories'))
+                            ->mapWithKeys(fn (string $key) => [$key => __("blog.categories.{$key}")])),
                     FileUpload::make('cover_image_path')->label('Cover image')->image()->imageEditor()->directory('posts'),
                     TextInput::make('author_name'),
                     TextInput::make('reading_minutes')->numeric()->suffix('min'),

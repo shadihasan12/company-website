@@ -8,20 +8,19 @@
     // Unconfigured profiles are dropped rather than linked to a dead page.
     $social = array_filter(config('site.social'));
 
-    $companyLinks = [
+    $companyLinks = collect([
         ['label' => __('nav.about'), 'route' => 'about'],
         ['label' => __('nav.work'), 'route' => 'work.index'],
-        ['label' => __('nav.insights'), 'route' => 'posts.index'],
+        ['label' => __('nav.insights'), 'route' => 'posts.index', 'when' => Nav::hasPosts()],
         ['label' => __('nav.contact'), 'route' => 'contact'],
         ['label' => __('careers.title'), 'route' => 'careers'],
-    ];
-
-    // Drop entries whose route is not registered — careers, for instance,
-    // only exists while hiring is switched on.
-    $companyLinks = array_values(array_filter(
-        $companyLinks,
-        fn (array $item) => \Illuminate\Support\Facades\Route::has($item['route']),
-    ));
+    ])
+        // Drop links with nothing behind them: careers only exists while
+        // hiring is on, and insights only once something is published.
+        ->filter(fn (array $item) => ($item['when'] ?? true)
+            && \Illuminate\Support\Facades\Route::has($item['route']))
+        ->values()
+        ->all();
 @endphp
 
 <footer class="relative overflow-hidden border-t border-hairline bg-surface-sunken">

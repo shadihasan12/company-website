@@ -330,11 +330,21 @@ does not exist yet. See [NEEDED.md](NEEDED.md).
 **Spam defence, in layers:** honeypot field, encrypted minimum-fill-time token, per-IP rate limiting,
 and Cloudflare Turnstile which activates automatically once keys are configured.
 
-### Epic 6 — Insights / blog
+### Epic 6 — Insights / blog ✅ **Complete** (T6.3 deferred)
 
-- **T6.1** Blog index + categories + pagination
-- **T6.2** Post detail (TOC, reading time, author, share, related posts, Article schema)
-- **T6.3** Downloadable resource gated behind email *(optional)*
+- **T6.1** ✅ Index at `/{locale}/insights` with category filtering and pagination. Only categories
+  with published posts are offered. Drafts and scheduled posts are hidden from the listing **and**
+  unreachable by direct URL.
+- **T6.2** ✅ Post detail: anchored headings, table of contents (shown from three headings up),
+  reading time, author, date, LinkedIn/X/copy-link sharing, related posts topped up to three, and
+  `Article` JSON-LD. Body HTML is styled by element in `.prose-content` using the site's own tokens
+  rather than pulling in the typography plugin.
+- **T6.3** ⏸ **Deferred: gated download.** There is no lead magnet to gate — building the gate,
+  file storage and delivery before the asset exists would be scaffolding with nothing behind it.
+  The newsletter capture from Epic 5 already covers email collection. Revisit when a resource exists.
+
+The **Insights link only appears in the navigation once a post is published**, so it never leads to
+an empty page. Run `php artisan db:seed --class=DemoContentSeeder` to see the design with sample posts.
 
 ### Epic 7 — SEO, performance & AI visibility
 

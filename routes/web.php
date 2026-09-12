@@ -5,6 +5,7 @@ use App\Http\Controllers\CareersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ScopeController;
 use App\Http\Controllers\ServiceController;
@@ -48,6 +49,9 @@ Route::prefix('{locale}')
                 ->middleware('throttle:6,1')
                 ->name('careers.store');
         }
+
+        Route::get('/insights', [PostController::class, 'index'])->name('posts.index');
+        Route::get('/insights/{post}', [PostController::class, 'show'])->name('posts.show');
 
         Route::get('/contact', [ContactController::class, 'show'])->name('contact');
         Route::get('/contact/thank-you', [ContactController::class, 'thanks'])->name('contact.thanks');

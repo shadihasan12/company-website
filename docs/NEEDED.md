@@ -31,6 +31,12 @@ These determine whether the site is real or a mockup.
       ten stock images.
 - [ ] **Are you hiring?** Careers is built but switched off. `CAREERS_ENABLED=true` publishes it.
 
+## Blog (Epic 6)
+
+- [ ] **Who writes it, and does it happen?** The blog is built and hidden from navigation until a
+      post is published. An abandoned blog is worse than none.
+- [ ] First 2–3 posts. Categories available: Engineering, Mobile, AI, Product, Company.
+
 ## Services (Epic 2)
 
 Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend & cloud:

@@ -52,6 +52,8 @@ class DemoContentSeeder extends Seeder
                 'slug' => 'sample-post-'.($sequence->index + 1),
                 'title' => ['en' => 'SAMPLE POST '.($sequence->index + 1).' — replace before launch'],
                 'author_name' => 'SAMPLE — Author',
+                'category' => config('site.post_categories')[$sequence->index % count(config('site.post_categories'))],
+                'body' => ['en' => '<h2>First heading</h2><p>'.fake()->paragraphs(3, true).'</p><h2>Second heading</h2><p>'.fake()->paragraphs(3, true).'</p><h3>A sub-heading</h3><p>'.fake()->paragraphs(2, true).'</p>'],
             ])
             ->create();
     }

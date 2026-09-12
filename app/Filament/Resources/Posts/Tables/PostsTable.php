@@ -18,6 +18,7 @@ class PostsTable
             ->columns([
                 ImageColumn::make('cover_image_path')->label('')->square(),
                 TextColumn::make('title')->searchable(['slug'])->weight('bold')->wrap(),
+                TextColumn::make('category')->badge()->color('gray')->toggleable(),
                 TextColumn::make('status')
                     ->badge()
                     ->state(fn ($record): string => match (true) {

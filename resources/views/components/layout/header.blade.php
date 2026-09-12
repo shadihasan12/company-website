@@ -1,12 +1,11 @@
 @php
     use App\Support\Nav;
 
-    $primaryNav = [
+    $primaryNav = collect([
         ['label' => __('nav.work'), 'route' => 'work.index'],
-        ['label' => __('nav.industries'), 'route' => 'industries.index'],
         ['label' => __('nav.about'), 'route' => 'about'],
-        ['label' => __('nav.insights'), 'route' => 'posts.index'],
-    ];
+        ['label' => __('nav.insights'), 'route' => 'posts.index', 'when' => Nav::hasPosts()],
+    ])->filter(fn (array $item) => $item['when'] ?? true)->all();
 
     $services = Nav::services();
 @endphp

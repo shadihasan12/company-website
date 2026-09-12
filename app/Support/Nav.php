@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\Post;
 use App\Models\Service;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
 use Illuminate\Support\Collection;
@@ -39,14 +40,29 @@ class Nav
      * Published services for the navigation and footer.
      *
      * Read from the database rather than config so unpublishing a service
-     * removes it from the menu too. Memoised because the header and footer
-     * both need it on every page.
+     * removes it from the menu too.
+     *
+     * Deliberately not memoised with once(): a static call site caches for
+     * the life of the process, which goes stale across requests under
+     * Octane and inside tests. Seven indexed rows twice per page is not
+     * worth that class of bug.
      *
      * @return Collection<int, Service>
      */
     public static function services(): Collection
     {
-        return once(fn () => Service::published()->ordered()->get());
+        return Service::published()->ordered()->get();
+    }
+
+    /**
+     * Whether anything is published on the blog.
+     *
+     * The Insights link is hidden until there is something behind it —
+     * sending a visitor to an empty page costs more than a missing link.
+     */
+    public static function hasPosts(): bool
+    {
+        return Post::published()->exists();
     }
 
     /** The best available way for a visitor to start a conversation. */

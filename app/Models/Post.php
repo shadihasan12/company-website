@@ -42,6 +42,15 @@ class Post extends Model
         $query->whereNotNull('published_at')->where('published_at', '<=', now());
     }
 
+    /**
+     * Mirrors {@see scopePublished()} for a single record, so a direct
+     * visit to a draft or scheduled post cannot bypass the same rule.
+     */
+    public function isPublished(): bool
+    {
+        return $this->published_at !== null && ! $this->published_at->isFuture();
+    }
+
     /** @param  Builder<$this>  $query */
     public function scopeLatestFirst(Builder $query): void
     {

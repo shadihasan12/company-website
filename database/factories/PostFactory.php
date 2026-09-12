@@ -18,6 +18,7 @@ class PostFactory extends Factory
             'title' => ['en' => $title],
             'excerpt' => ['en' => fake()->sentence(20)],
             'body' => ['en' => fake()->paragraphs(6, true)],
+            'category' => fake()->randomElement(config('site.post_categories')),
             'author_name' => fake()->name(),
             'reading_minutes' => fake()->numberBetween(3, 12),
             'published_at' => fake()->dateTimeBetween('-1 year'),
