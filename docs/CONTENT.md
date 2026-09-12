@@ -5,6 +5,14 @@ Extracted from the supplied CV.
 Ready to seed in **T0.2**. Client names are placeholders per your instruction and become
 editable from the admin panel in T0.3. Nothing here references the team or team size.
 
+> **Seeded as of T0.2.** All seven projects are in the database with their real stacks, services and
+> industries. Run `php artisan content:audit` at any time for a live list of what is still missing.
+>
+> **Deliberately not seeded:** metrics, testimonials and blog posts. No figures were supplied, and
+> putting invented numbers or fabricated client quotes on a live site is a real liability, not a
+> placeholder. They live in `DemoContentSeeder` and must be asked for explicitly:
+> `php artisan db:seed --class=DemoContentSeeder` — every string there is prefixed `SAMPLE`.
+
 > **Still needed from you — screenshots.** Yes, screenshots matter more than almost anything else
 > on the page. A case study without them reads as a claim; with them it reads as evidence, and the
 > research is unambiguous that visual proof is what converts. Per project I need **3–8 images**:

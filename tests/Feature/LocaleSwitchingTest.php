@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Support\Locale;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 /**
@@ -12,6 +13,9 @@ use Tests\TestCase;
  */
 class LocaleSwitchingTest extends TestCase
 {
+    // The home page reads services and projects from the database.
+    use RefreshDatabase;
+
     protected function enableArabic(): void
     {
         config()->set('site.locales.ar', [

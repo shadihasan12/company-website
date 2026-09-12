@@ -2,24 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
-     * Seed the application's database.
+     * Seeds real, verifiable content only.
+     *
+     * Invented metrics, testimonials and blog posts live in
+     * DemoContentSeeder and must be requested explicitly.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            IndustrySeeder::class,
+            TechnologySeeder::class,
+            ServiceSeeder::class,
+            PortfolioSeeder::class,
         ]);
+
+        $this->command?->newLine();
+        $this->command?->info('Seeded. Run `php artisan content:audit` to see what content is still missing.');
     }
 }

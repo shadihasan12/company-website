@@ -229,9 +229,11 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
 - **T0.1 — Design system & shell.** ✅ **Done.** Tailwind 4 theme tokens, Latin + Arabic font stacks,
   dark/light themes, bilingual locale routing with full RTL, base layout, header with services mega-menu,
   mobile nav, footer, and the `ui.*` component library. Styleguide at `/{locale}/styleguide`.
-- **T0.2 — Data model.** Migrations, models, factories, seeders for: `services`, `projects` (case studies),
-  `clients`, `testimonials`, `technologies`, `industries`, `posts`, `leads`. Seeded with
-  realistic placeholder content so every page is viewable before real content arrives.
+- **T0.2 — Data model.** ✅ **Done.** 10 tables, 8 models, factories and seeders for `services`,
+  `projects`, `clients`, `testimonials`, `technologies`, `industries`, `posts`, `leads` and the two
+  pivots. Every public-facing text column is per-locale JSON, so Arabic needs a content pass rather
+  than a migration. Seeded with the seven real projects from the CV.
+  Also ships `php artisan content:audit`, which lists every gap blocking launch.
 - **T0.3 — Admin panel.** Filament v4 so you can add clients/projects/posts without me. Auth, roles,
   media uploads, image conversions.
 

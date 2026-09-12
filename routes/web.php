@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\SetLocale;
 use App\Support\Locale;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ Route::prefix('{locale}')
     ->whereIn('locale', array_keys(config('site.locales')))
     ->middleware(SetLocale::class)
     ->group(function () {
-        Route::view('/', 'pages.home')->name('home');
+        Route::get('/', HomeController::class)->name('home');
 
         // Internal reference for the design system. Not linked publicly and
         // not indexed; remove or gate before launch.

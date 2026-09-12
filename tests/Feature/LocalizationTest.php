@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LocalizationTest extends TestCase
 {
+    // The home page reads services and projects from the database.
+    use RefreshDatabase;
+
     public function test_root_redirects_to_the_active_locale(): void
     {
         $this->get('/')->assertRedirect('/en');
