@@ -247,8 +247,11 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
   count, scroll cue. Animated orbit rings echoing the logo mark plus drifting brand glows — transform
   only, so they stay on the compositor. The h1 is never faded in, because an element at opacity 0
   does not count as painted and a fade would delay LCP by the full animation duration.
-- **T1.2** Client logo strip / marquee
-- **T1.3** Services grid (6 cards → service pages)
+- **T1.2** ✅ **Done.** Client logo strip: seamless CSS marquee, paused on hover/focus, wrapping
+  instead of scrolling under reduced motion. Shows only clients we are permitted to name, and falls
+  back to a text wordmark until a logo file is uploaded.
+- **T1.3** ✅ **Done.** Services grid: all seven services from the database with icon, tagline,
+  excerpt and hover state, plus an "All services" CTA.
 - **T1.4** Featured case studies
 - **T1.5** Stats / credibility band with count-up animation
 - **T1.6** "How we work" process timeline

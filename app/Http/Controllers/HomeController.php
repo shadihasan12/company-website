@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Contracts\View\View;
@@ -15,6 +16,9 @@ class HomeController extends Controller
             // drift away from what the portfolio actually contains.
             'shippedCount' => Project::published()->count(),
             'services' => Service::published()->ordered()->get(),
+            // Named clients only. The strip falls back to a wordmark until
+            // a logo file is uploaded.
+            'clients' => Client::named()->ordered()->get(),
             'featuredProjects' => Project::published()
                 ->featured()
                 ->ordered()

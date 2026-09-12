@@ -68,6 +68,20 @@ class Client extends Model
         $query->where('is_named', true)->whereNotNull('logo_path');
     }
 
+    /**
+     * Clients we are permitted to name.
+     *
+     * Broader than {@see scopeShowcaseable()}: the logo strip falls back to
+     * a text wordmark when no logo file has been supplied yet, so it is
+     * useful before the artwork arrives.
+     *
+     * @param  Builder<$this>  $query
+     */
+    public function scopeNamed(Builder $query): void
+    {
+        $query->where('is_named', true);
+    }
+
     /** @param  Builder<$this>  $query */
     public function scopeFeatured(Builder $query): void
     {

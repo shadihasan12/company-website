@@ -1,30 +1,11 @@
 <x-layouts.app :description="__('home.hero.subhead')">
     <x-sections.hero :shipped-count="$shippedCount" />
 
-    {{-- Sections below are still the T0.2 data preview; T1.2–T1.10 replace
-         them with their designed equivalents. --}}
+    <x-sections.client-strip :clients="$clients" />
 
-    <x-ui.section tone="raised" size="compact">
-        <x-ui.container>
-            <x-ui.section-heading :title="__('home.services_title')">
-                {{ __('home.services_note') }}
-            </x-ui.section-heading>
+    <x-sections.services :services="$services" />
 
-            <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>
-                @foreach ($services as $service)
-                    <x-ui.card>
-                        <span class="grid size-11 place-items-center rounded-xl bg-brand-500/12 text-brand-300 transition-colors group-hover:bg-accent-500/15 group-hover:text-accent-400">
-                            <x-ui.icon :name="$service->icon" size="size-5" />
-                        </span>
-
-                        <h3 class="mt-5 font-display text-lg font-bold">{{ $service->title }}</h3>
-                        <p class="mt-1 text-sm text-accent-400">{{ $service->tagline }}</p>
-                        <p class="mt-3 grow text-sm leading-relaxed text-content-muted">{{ $service->excerpt }}</p>
-                    </x-ui.card>
-                @endforeach
-            </div>
-        </x-ui.container>
-    </x-ui.section>
+    {{-- The work section is still the T0.2 data preview; T1.4 replaces it. --}}
 
     <x-ui.section size="compact" id="work">
         <x-ui.container>

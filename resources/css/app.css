@@ -236,6 +236,58 @@
     .js-reveal {
         will-change: transform, opacity;
     }
+
+    /* Infinite logo marquee.
+       The track holds the same list twice, so translating exactly -50%
+       lands on an identical frame and the loop is seamless. Pure CSS —
+       no JS, no layout work, and it costs nothing on the main thread. */
+    .marquee {
+        display: flex;
+        width: max-content;
+        animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+    }
+
+    [dir='rtl'] .marquee {
+        animation-direction: reverse;
+    }
+
+    .marquee-viewport:hover .marquee,
+    .marquee-viewport:focus-within .marquee {
+        animation-play-state: paused;
+    }
+
+    /* Fade the strip into the page at both ends rather than cutting it. */
+    .marquee-viewport {
+        overflow: hidden;
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            #000 8%,
+            #000 92%,
+            transparent
+        );
+    }
+
+    @keyframes marquee-scroll {
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* With motion reduced the track stops and simply wraps, so every logo
+       is still reachable instead of frozen mid-scroll. */
+    @media (prefers-reduced-motion: reduce) {
+        .marquee {
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: none;
+        }
+
+        .marquee-viewport {
+            mask-image: none;
+        }
+    }
 }
 
 /* Accessibility: honour the OS "reduce motion" setting everywhere. */

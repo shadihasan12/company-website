@@ -13,8 +13,15 @@ return [
         'scroll' => 'Scroll',
     ],
 
-    'services_title' => 'Services',
-    'services_note' => 'Seeded from the database. Edit these from the admin panel once T0.3 ships.',
+    'clients' => [
+        'title' => 'Trusted by',
+    ],
+
+    'services' => [
+        'eyebrow' => 'What we do',
+        'title' => 'Seven ways we ship software.',
+        'subhead' => 'From a single mobile app to a full ERP rollout — designed, built and handed over clean.',
+    ],
     'work_title' => 'Featured work',
     'work_note' => 'Real projects, real stacks. Screenshots and results are still outstanding — run :command to see every gap.',
 ];
