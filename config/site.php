@@ -168,6 +168,33 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Search engine indexing
+    |--------------------------------------------------------------------------
+    |
+    | Defaults to the production environment, so staging and local copies
+    | cannot be indexed by accident and production does not depend on
+    | somebody remembering to flip a switch at launch.
+    |
+    | SITE_INDEXABLE overrides it in either direction.
+    |
+    */
+
+    'indexable' => env('SITE_INDEXABLE', null),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Social sharing image
+    |--------------------------------------------------------------------------
+    |
+    | Used when a page has no image of its own. Drop a 1200x630 PNG at
+    | public/images/og-default.png and it is picked up automatically.
+    |
+    */
+
+    'og_image' => 'images/og-default.png',
+
+    /*
+    |--------------------------------------------------------------------------
     | Post categories
     |--------------------------------------------------------------------------
     |

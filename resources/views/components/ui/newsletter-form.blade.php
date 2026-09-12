@@ -1,3 +1,9 @@
+@php
+    // Error pages render outside the session middleware, so $errors is not
+    // shared. Fall back to an empty bag rather than taking the page down.
+    $errors ??= new \Illuminate\Support\ViewErrorBag;
+@endphp
+
 <form method="POST" action="{{ route('newsletter.store') }}" {{ $attributes->class(['relative flex flex-col gap-2']) }}>
     @csrf
     <x-ui.honeypot />

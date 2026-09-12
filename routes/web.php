@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ScopeController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SetLocale;
 use App\Support\Locale;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => redirect('/'.Locale::preferred()));
+
+// Outside the locale group: both are single documents covering every locale.
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::prefix('{locale}')
     ->whereIn('locale', array_keys(config('site.locales')))

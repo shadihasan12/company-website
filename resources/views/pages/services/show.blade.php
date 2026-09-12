@@ -2,7 +2,34 @@
     use App\Support\Nav;
 @endphp
 
+@php
+    use App\Support\Seo;
+@endphp
+
 <x-layouts.app :title="(string) $service->title" :description="(string) $service->excerpt">
+    <x-slot:head>
+        <script type="application/ld+json">
+            {!! json_encode(array_filter([
+                '@context' => 'https://schema.org',
+                '@type' => 'Service',
+                'name' => (string) $service->title,
+                'description' => (string) $service->excerpt,
+                'url' => Seo::canonical(),
+                'serviceType' => (string) $service->title,
+                'provider' => ['@id' => url('/').'#organization'],
+                'areaServed' => config('site.address.country') ?: null,
+            ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+
+        <script type="application/ld+json">
+            {!! json_encode(Seo::breadcrumbs([
+                config('site.name') => route('home'),
+                __('nav.services') => route('services.index'),
+                (string) $service->title => Seo::canonical(),
+            ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    </x-slot:head>
+
     {{-- Hero ---------------------------------------------------------- --}}
     <x-ui.section size="compact">
         <div class="glow -top-32 start-1/3 size-[30rem] bg-brand-500/25" aria-hidden="true"></div>

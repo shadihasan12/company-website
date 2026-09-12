@@ -9,6 +9,9 @@
 ])
 
 @php
+    // See the note in newsletter-form: $errors is absent on error pages.
+    $errors ??= new \Illuminate\Support\ViewErrorBag;
+
     $id = 'field-'.$name;
     $hasError = $errors->has($name);
     $describedBy = $hasError ? "{$id}-error" : null;

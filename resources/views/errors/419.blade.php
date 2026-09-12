@@ -1,0 +1,5 @@
+<x-errors.layout
+    code="419"
+    :title="__('errors.419.title')"
+    :body="__('errors.419.body')"
+/>

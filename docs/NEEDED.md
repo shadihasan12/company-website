@@ -69,6 +69,14 @@ Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend &
 - [ ] Booking link (Calendly / Cal.com) — set `SITE_BOOKING_URL` and it appears on the contact page.
 - [ ] `LEADS_NOTIFY_EMAIL` if new leads should go somewhere other than the public address.
 
+## SEO (Epic 7)
+
+- [ ] **A 1200×630 social sharing image** at `public/images/og-default.png`. Without it, pages with
+      no image of their own share as a plain text card.
+- [ ] Confirm nothing should stay out of the sitemap before launch.
+- [ ] **Delete the SAMPLE demo content** before going live (`php artisan content:audit` will still
+      show the real gaps).
+
 ## Launch (Epics 7 & 9)
 
 - [ ] Domain DNS access

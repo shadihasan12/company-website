@@ -346,13 +346,29 @@ and Cloudflare Turnstile which activates automatically once keys are configured.
 The **Insights link only appears in the navigation once a post is published**, so it never leads to
 an empty page. Run `php artisan db:seed --class=DemoContentSeeder` to see the design with sample posts.
 
-### Epic 7 — SEO, performance & AI visibility
+### Epic 7 — SEO, performance & AI visibility ✅ **Complete** (one item deferred)
 
-- **T7.1** Meta/OG/Twitter tags, canonical URLs, dynamic OG image generation, `sitemap.xml`, `robots.txt`
-- **T7.2** JSON-LD: Organization, Service, Article, BreadcrumbList, FAQPage, Review
-- **T7.3** Performance: image optimization + WebP/AVIF, lazy loading, font preloading, deferred JS,
-  caching, Core Web Vitals audit (target: LCP < 2.5s, INP < 200ms, CLS < 0.1)
-- **T7.4** Accessibility pass (WCAG 2.2 AA), 404/500 pages, security headers
+- **T7.1** ✅ Title, description, canonical (query string stripped, so filtered and paginated views
+  do not compete with the clean listing), Open Graph, Twitter cards, hreflang (emitted only once a
+  second locale is live), dynamic `sitemap.xml` and `robots.txt`.
+  **Indexing defaults to the production environment**, so staging cannot be indexed by accident and
+  launch does not depend on anyone flipping a switch. `SITE_INDEXABLE` overrides either way.
+  ⏸ *Dynamic OG image generation deferred:* it needs a licensed TTF to render text into a PNG, which
+  is a brand asset rather than code. Drop a 1200×630 `public/images/og-default.png` and it is used
+  automatically; per-record images (case study hero, post cover) already take priority.
+- **T7.2** ✅ Organization (every page, with `@id` so other nodes reference it), Service,
+  CreativeWork, Article, BreadcrumbList, FAQPage. **AggregateRating is emitted only when genuinely
+  rated testimonials exist** — fabricated review data is a manual-action risk, not a placeholder.
+- **T7.3** ✅ `fetchpriority="high"` on LCP images, lazy loading and `decoding="async"` elsewhere,
+  aspect-ratio containers so images cannot shift layout, three font preloads, module-deferred JS.
+  Budget holding at **64.7KB JS / 10.7KB CSS gzipped** against 150KB.
+  *A real Lighthouse run against production hardware is still outstanding.*
+- **T7.4** ✅ Branded 403/404/419/429/500/503 pages, always `noindex`. Security headers on every
+  response: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
+  `X-Permitted-Cross-Domain-Policies`, and HSTS over HTTPS only.
+  *No strict CSP:* Alpine evaluates expressions with `new Function`, so any policy tight enough to
+  matter needs `unsafe-eval`; one carrying both `unsafe-eval` and `unsafe-inline` implies protection
+  it does not provide. Adding one means moving to Alpine's CSP build first.
 
 ### Epic 8 — Internationalization *(folded into every epic — see §1.5)*
 

@@ -22,7 +22,6 @@
             @if ($categoryOptions->isNotEmpty())
                 <x-ui.filter-bar
                     class="mt-12 justify-center"
-                    :label="''"
                     param="category"
                     :options="$categoryOptions"
                     :active="$category"

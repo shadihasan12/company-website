@@ -5,7 +5,12 @@
     $shareUrl = url()->current();
 @endphp
 
-<x-layouts.app :title="(string) $post->title" :description="(string) $post->excerpt">
+<x-layouts.app
+    :title="(string) $post->title"
+    :description="(string) $post->excerpt"
+    :image="$post->cover_image_path"
+    type="article"
+>
     <x-slot:head>
         {{-- Article structured data. Search engines and AI assistants read
              this to establish what the piece is and who published it. --}}
@@ -21,6 +26,14 @@
                 'publisher' => ['@type' => 'Organization', 'name' => config('site.name')],
                 'image' => $post->cover_image_path ? url(Storage::url($post->cover_image_path)) : null,
                 'mainEntityOfPage' => $shareUrl,
+            ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+
+        <script type="application/ld+json">
+            {!! json_encode(\App\Support\Seo::breadcrumbs([
+                config('site.name') => route('home'),
+                __('blog.title') => route('posts.index'),
+                (string) $post->title => $shareUrl,
             ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
         </script>
     </x-slot:head>
@@ -64,9 +77,12 @@
                 </p>
 
                 @if ($post->cover_image_path)
+                    {{-- LCP candidate on a post page. --}}
                     <img
                         src="{{ Storage::url($post->cover_image_path) }}"
                         alt=""
+                        fetchpriority="high"
+                        decoding="async"
                         class="mt-10 w-full rounded-2xl object-cover ring-1 ring-hairline"
                     >
                 @endif

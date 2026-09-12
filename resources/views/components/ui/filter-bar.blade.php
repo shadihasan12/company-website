@@ -1,5 +1,5 @@
 @props([
-    'label',
+    'label' => null,
     'param',
     'options',
     'active' => null,
@@ -17,7 +17,9 @@
 @endphp
 
 <div {{ $attributes->class(['flex flex-wrap items-center gap-2']) }}>
-    <span class="me-1 text-xs font-semibold tracking-wider text-content-subtle uppercase">{{ $label }}</span>
+    @if (filled($label))
+        <span class="me-1 text-xs font-semibold tracking-wider text-content-subtle uppercase">{{ $label }}</span>
+    @endif
 
     <a
         href="{{ $urlFor(null) }}"

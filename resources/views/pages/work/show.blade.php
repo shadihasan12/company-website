@@ -2,7 +2,35 @@
     use App\Support\Nav;
 @endphp
 
-<x-layouts.app :title="$project->name" :description="(string) $project->summary">
+<x-layouts.app
+    :title="$project->name"
+    :description="(string) $project->summary"
+    :image="$project->hero_image_path ?? ($project->gallery[0] ?? null)"
+    type="article"
+>
+    <x-slot:head>
+        <script type="application/ld+json">
+            {!! json_encode(array_filter([
+                '@context' => 'https://schema.org',
+                '@type' => 'CreativeWork',
+                'name' => $project->name,
+                'description' => (string) $project->summary,
+                'url' => \App\Support\Seo::canonical(),
+                'creator' => ['@id' => url('/').'#organization'],
+                'datePublished' => $project->completed_at?->toDateString(),
+                'keywords' => $project->technologies->pluck('name')->implode(', ') ?: null,
+            ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+
+        <script type="application/ld+json">
+            {!! json_encode(\App\Support\Seo::breadcrumbs([
+                config('site.name') => route('home'),
+                __('nav.work') => route('work.index'),
+                $project->name => \App\Support\Seo::canonical(),
+            ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    </x-slot:head>
+
     {{-- Hero ----------------------------------------------------------- --}}
     <x-ui.section size="compact">
         <div class="glow -top-32 start-1/3 size-[30rem] bg-brand-500/25" aria-hidden="true"></div>
@@ -67,9 +95,13 @@
             </div>
 
             @if ($project->hero_image_path)
+                {{-- Above the fold and usually the LCP element, so it is
+                     fetched eagerly and at high priority. --}}
                 <img
                     src="{{ \Illuminate\Support\Facades\Storage::url($project->hero_image_path) }}"
                     alt="{{ $project->name }}"
+                    fetchpriority="high"
+                    decoding="async"
                     class="mt-12 w-full rounded-2xl object-cover ring-1 ring-hairline"
                 >
             @endif

@@ -39,7 +39,11 @@ class DemoContentSeeder extends Seeder
                     'client_id' => $project->client_id,
                     'author_title' => ['en' => 'SAMPLE — Job title'],
                     'quote' => ['en' => 'SAMPLE TESTIMONIAL — this is placeholder text for layout only. Replace it with a real, attributed client quote before this site goes live.'],
-                    'rating' => 5,
+                    // Deliberately unrated: a rating here would feed a
+                    // fabricated AggregateRating into the site's structured
+                    // data, which is a manual-action risk with search
+                    // engines rather than a harmless placeholder.
+                    'rating' => null,
                     'is_featured' => true,
                     'sort_order' => $index,
                 ],

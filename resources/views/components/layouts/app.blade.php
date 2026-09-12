@@ -1,14 +1,21 @@
 @props([
     'title' => null,
     'description' => null,
+    'image' => null,
+    'type' => 'website',
+    'noindex' => false,
 ])
 
 @php
     use App\Support\Locale;
+    use App\Support\Seo;
 
     $locale = Locale::current();
     $siteName = config('site.name');
     $pageTitle = $title ? "{$title} — {$siteName}" : $siteName;
+    $metaDescription = $description ?: __('home.hero.subhead');
+    $ogImage = Seo::image($image);
+    $indexable = Seo::isIndexable() && ! $noindex;
 
     // The Arabic face is ~90KB and is only needed on RTL pages, so it is
     // requested only there. Latin faces load everywhere — Arabic pages still
@@ -31,13 +38,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ $pageTitle }}</title>
+    <meta name="description" content="{{ $metaDescription }}">
 
-    @if ($description)
-        <meta name="description" content="{{ $description }}">
+    {{-- Canonical drops the query string, so filtered and paginated views
+         point back at the clean listing instead of competing with it. --}}
+    <link rel="canonical" href="{{ Seo::canonical() }}">
+
+    @foreach (Seo::alternates() as $alternate)
+        <link rel="alternate" hreflang="{{ $alternate['hreflang'] }}" href="{{ $alternate['href'] }}">
+    @endforeach
+
+    {{-- Defaults to the production environment, so a staging copy cannot
+         be indexed by accident. --}}
+    <meta name="robots" content="{{ $indexable ? 'index, follow, max-image-preview:large' : 'noindex, nofollow' }}">
+
+    <meta property="og:type" content="{{ $type }}">
+    <meta property="og:site_name" content="{{ $siteName }}">
+    <meta property="og:title" content="{{ $pageTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:url" content="{{ Seo::canonical() }}">
+    <meta property="og:locale" content="{{ $locale }}">
+
+    @if ($ogImage)
+        <meta property="og:image" content="{{ $ogImage }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:image" content="{{ $ogImage }}">
+    @else
+        <meta name="twitter:card" content="summary">
     @endif
 
-    {{-- Full SEO/OG/JSON-LD handling lands in T7.1–T7.2. --}}
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="twitter:title" content="{{ $pageTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+
+    {{-- Organization is emitted on every page: it is how search engines
+         and AI assistants establish what this company is. --}}
+    <script type="application/ld+json">
+        {!! json_encode(['@context' => 'https://schema.org', ...Seo::organization()], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+    </script>
 
     {{-- Applied before first paint to avoid a light/dark flash. Inline and
          synchronous on purpose: a deferred script would flash. --}}
