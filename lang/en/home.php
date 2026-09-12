@@ -22,6 +22,11 @@ return [
         'title' => 'Seven ways we ship software.',
         'subhead' => 'From a single mobile app to a full ERP rollout — designed, built and handed over clean.',
     ],
-    'work_title' => 'Featured work',
-    'work_note' => 'Real projects, real stacks. Screenshots and results are still outstanding — run :command to see every gap.',
+    'work' => [
+        'eyebrow' => 'Selected work',
+        'title' => 'Shipped, reviewed, and in real hands.',
+        'subhead' => 'Products that made it through App Store and Play Store review and into daily use.',
+        'cta' => 'All case studies',
+        'live_on' => '{1} :count live link|[2,*] :count live links',
+    ],
 ];
