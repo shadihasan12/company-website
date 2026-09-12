@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Service;
+use App\Models\Technology;
+use App\Models\Testimonial;
 use App\Support\SiteStats;
 use Illuminate\Contracts\View\View;
 
@@ -21,6 +23,12 @@ class HomeController extends Controller
             // a logo file is uploaded.
             'clients' => Client::named()->ordered()->get(),
             'stats' => SiteStats::all(),
+            // Grouped by category so the strip reads as a stack rather
+            // than an undifferentiated tag cloud.
+            'technologies' => Technology::ordered()->get()->groupBy('category'),
+            // Empty until real quotes arrive — the section hides itself
+            // rather than shipping invented social proof.
+            'testimonials' => Testimonial::featured()->ordered()->with('client')->take(3)->get(),
             'featuredProjects' => Project::published()
                 ->featured()
                 ->ordered()

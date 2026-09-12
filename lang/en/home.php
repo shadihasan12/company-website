@@ -64,6 +64,24 @@ return [
         ],
     ],
 
+    'tech' => [
+        'eyebrow' => 'Stack',
+        'title' => 'What we build with.',
+        'subhead' => 'Chosen for what a project needs, not for what is fashionable this year.',
+        'categories' => [
+            'language' => 'Languages',
+            'framework' => 'Frameworks',
+            'service' => 'Services',
+            'tool' => 'Tooling',
+        ],
+    ],
+
+    'testimonials' => [
+        'eyebrow' => 'In their words',
+        'title' => 'What clients say.',
+        'rating' => '{1} :count out of 5|[2,*] :count out of 5',
+    ],
+
     'work' => [
         'eyebrow' => 'Selected work',
         'title' => 'Shipped, reviewed, and in real hands.',

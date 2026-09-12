@@ -10,4 +10,8 @@
     <x-sections.stats :stats="$stats" />
 
     <x-sections.process />
+
+    <x-sections.tech :technologies="$technologies" />
+
+    <x-sections.testimonials :testimonials="$testimonials" />
 </x-layouts.app>

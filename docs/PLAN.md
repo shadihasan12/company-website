@@ -262,8 +262,11 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
 - **T1.6** ✅ **Done.** Six-step process timeline with a gradient rail, driven by
   `config('site.process')` — reorder or trim the array to change it. Copy is a first draft in
   `lang/en/home.php` under `process.steps`; **rewrite it in your own words.**
-- **T1.7** Tech stack strip
-- **T1.8** Testimonials carousel
+- **T1.7** ✅ **Done.** Stack section: technologies from the database grouped into Languages,
+  Frameworks, Services and Tooling. Empty categories are skipped.
+- **T1.8** ✅ **Built, and currently hidden.** Testimonial cards with rating, quote, photo or
+  initials, name, title and client. Renders nothing until real quotes exist — never seeded, because
+  fabricated social proof on a live site is a liability. Only clients we may name are credited.
 - **T1.9** Industries we serve
 - **T1.10** Closing CTA band + named contact person
 
