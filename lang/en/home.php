@@ -22,6 +22,16 @@ return [
         'title' => 'Seven ways we ship software.',
         'subhead' => 'From a single mobile app to a full ERP rollout — designed, built and handed over clean.',
     ],
+    'stats' => [
+        'projects' => 'Products shipped',
+        'years' => 'Years building',
+        'industries' => 'Industries served',
+        'clients' => 'Clients',
+        'app_rating' => 'Average store rating',
+        'uptime' => 'Uptime',
+        'nps' => 'Net promoter score',
+    ],
+
     'work' => [
         'eyebrow' => 'Selected work',
         'title' => 'Shipped, reviewed, and in real hands.',

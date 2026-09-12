@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Service;
+use App\Support\SiteStats;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -19,6 +20,7 @@ class HomeController extends Controller
             // Named clients only. The strip falls back to a wordmark until
             // a logo file is uploaded.
             'clients' => Client::named()->ordered()->get(),
+            'stats' => SiteStats::all(),
             'featuredProjects' => Project::published()
                 ->featured()
                 ->ordered()

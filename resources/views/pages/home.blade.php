@@ -6,4 +6,6 @@
     <x-sections.services :services="$services" />
 
     <x-sections.work :projects="$featuredProjects" />
+
+    <x-sections.stats :stats="$stats" />
 </x-layouts.app>

@@ -255,7 +255,10 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
 - **T1.4** ✅ **Done.** Featured case studies: industry badge, live-link count, client, summary,
   metrics and stack per card. Projects without a screenshot render a branded orbit panel rather than
   an empty box, so the layout reads as deliberate while artwork is outstanding.
-- **T1.5** Stats / credibility band with count-up animation
+- **T1.5** ✅ **Done.** Credibility band with count-up animation. Projects, years and industries are
+  computed from real records; clients, rating, uptime and NPS come from `config('site.stats')` and are
+  omitted entirely while unset. The band hides below two figures — one lonely statistic reads worse
+  than none.
 - **T1.6** "How we work" process timeline
 - **T1.7** Tech stack strip
 - **T1.8** Testimonials carousel

@@ -118,6 +118,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Credibility statistics
+    |--------------------------------------------------------------------------
+    |
+    | The band under the case studies. Every top agency site runs one:
+    | Netguru's reads "NPS 73 · 2500+ projects · 400+ people · 17+ years".
+    |
+    | Anything left null is hidden rather than guessed, so the band never
+    | shows a number nobody can stand behind. Projects, years and industries
+    | are computed from real data and need nothing here.
+    |
+    | Headcount is deliberately absent — the site references neither the
+    | team nor its size.
+    |
+    */
+
+    'stats' => [
+        'clients' => null,      // e.g. 24
+        'app_rating' => null,   // e.g. 4.8
+        'uptime' => null,       // e.g. 99.9
+        'nps' => null,          // e.g. 73
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Services
     |--------------------------------------------------------------------------
     |
