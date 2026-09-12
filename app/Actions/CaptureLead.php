@@ -44,6 +44,17 @@ class CaptureLead
 
         $this->notify($lead);
 
+        // Read once by the analytics component on the page the visitor
+        // lands on, so a refresh cannot report the same conversion twice.
+        session()->flash('conversion', [
+            'event' => 'lead_submitted',
+            'properties' => array_filter([
+                'source' => $lead->source,
+                'service' => (string) ($lead->service?->title ?? ''),
+                'budget' => $lead->budget_range,
+            ]),
+        ]);
+
         return $lead;
     }
 

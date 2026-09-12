@@ -51,4 +51,27 @@ return [
         'secret' => env('TURNSTILE_SECRET'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Analytics
+    |--------------------------------------------------------------------------
+    |
+    | Nothing is loaded unless an id is configured, so no third-party script
+    | reaches a visitor until the client has actually chosen a provider.
+    |
+    */
+
+    'ga4' => [
+        'id' => env('GA4_MEASUREMENT_ID'),
+    ],
+
+    'plausible' => [
+        'domain' => env('PLAUSIBLE_DOMAIN'),
+        'host' => env('PLAUSIBLE_HOST', 'https://plausible.io'),
+    ],
+
+    'search_console' => [
+        'verification' => env('GOOGLE_SITE_VERIFICATION'),
+    ],
+
 ];

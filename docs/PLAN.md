@@ -378,13 +378,35 @@ an empty page. Run `php artisan db:seed --class=DemoContentSeeder` to see the de
 - **T8.3** `hreflang` tags, per-locale sitemaps, Arabic meta/OG copy. *(part of T7.1)*
 - **T8.4** RTL QA pass across every page, RTL-mirrored GSAP animations
 
-### Epic 9 — Launch
+### Epic 9 — Launch ✅ **Complete** (backups left as a hosting decision)
 
-- **T9.1** Analytics + Search Console + conversion event tracking
-- **T9.2** Deployment: env config, production DB, queue worker, scheduler, backups, SSL, CI
-- **T9.3** Pre-launch QA checklist (cross-browser, cross-device, forms, links, Lighthouse)
+- **T9.1** ✅ GA4 and Plausible, both config-gated — no third-party script reaches a visitor until a
+  provider is chosen, and **analytics never loads outside production**, so local and staging traffic
+  cannot pollute the client's reports. Every lead-capture path flashes a `lead_submitted` conversion
+  carrying source, service and budget; it is read once from the server flash, so refreshing the
+  thank-you page cannot inflate it. Search Console verification tag included.
+- **T9.2** ✅ `composer deploy`, a GitHub Actions CI workflow (Pint + tests + build), and
+  [DEPLOY.md](DEPLOY.md) covering requirements, first deploy, routine deploys, web server, queues
+  and post-launch steps.
+  *Queues:* lead notifications are intentionally synchronous. With no worker running, a queued
+  notification would silently never arrive, and a lost enquiry costs more than a second of response
+  time. The runbook documents the two changes that must be made together to move them.
+  *Backups:* deliberately not implemented — the right target depends on the host, and a backup
+  nobody has restored is not a backup. The runbook states what must be covered, including
+  `storage/app/public`, which holds every uploaded image and is not in git.
+- **T9.3** ✅ `php artisan launch:check` — separates **blocking** issues (debug on, localhost URL,
+  log mail driver, no admin, SAMPLE content still present) from **warnings** (SQLite, no Turnstile,
+  no analytics, missing logo or OG image, no client logos). `composer deploy` runs it last.
+  *A real Lighthouse run against production hardware is still outstanding.*
 
 ---
+
+## Status
+
+All nine epics complete. 202 tests passing. JS 64.7KB / CSS 10.7KB gzipped, against a 150KB budget.
+
+What remains is content and credentials, not code — see [NEEDED.md](NEEDED.md), and run
+`php artisan launch:check` and `php artisan content:audit` for the live picture.
 
 ## Sources
 

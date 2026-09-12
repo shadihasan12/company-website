@@ -98,6 +98,8 @@
     @fonts($fontAliases)
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <x-ui.analytics />
+
     {{ $head ?? '' }}
     @stack('schema')
 </head>

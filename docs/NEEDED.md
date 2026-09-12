@@ -77,11 +77,15 @@ Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend &
 - [ ] **Delete the SAMPLE demo content** before going live (`php artisan content:audit` will still
       show the real gaps).
 
-## Launch (Epics 7 & 9)
+## Launch (Epic 9)
+
+Run `php artisan launch:check` for the live version of this list.
 
 - [ ] Domain DNS access
-- [ ] Hosting: VPS, Forge, Cloudways?
-- [ ] Production database: MySQL or PostgreSQL? (currently SQLite)
-- [ ] Analytics: GA4 or Plausible, plus Search Console access
+- [ ] Hosting: VPS, Forge, Cloudways? See [DEPLOY.md](DEPLOY.md) for requirements.
+- [ ] **Production database: MySQL or PostgreSQL?** SQLite is the local default and is not suitable.
+- [ ] **Backup target** — must cover the database *and* `storage/app/public`, which holds every
+      uploaded logo, screenshot and cover image and is not in git.
+- [ ] Analytics: GA4 measurement id or Plausible domain, plus Search Console access
 - [ ] Social profile URLs and any Clutch / GoodFirms / G2 profiles for review badges
 - [ ] Certifications and partnerships (AWS, Google Cloud, Microsoft, Odoo, Apple)
