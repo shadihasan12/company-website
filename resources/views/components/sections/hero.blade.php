@@ -63,7 +63,7 @@
             </p>
 
             <div class="flex flex-wrap items-center justify-center gap-3" data-hero-item>
-                <x-ui.button :href="Nav::contact()" size="lg" icon="arrow-right">
+                <x-ui.button :href="Nav::start()" size="lg" icon="arrow-right">
                     {{ __('home.hero.primary_cta') }}
                 </x-ui.button>
 

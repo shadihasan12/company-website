@@ -54,4 +54,15 @@ class Nav
     {
         return static::link('contact', 'mailto:'.config('site.contact.email'));
     }
+
+    /**
+     * The highest-intent entry point.
+     *
+     * "Start a project" buttons go to the scoping wizard, which captures
+     * far more than a bare contact form, and fall back to contact.
+     */
+    public static function start(): string
+    {
+        return static::link('scope', static::contact());
+    }
 }

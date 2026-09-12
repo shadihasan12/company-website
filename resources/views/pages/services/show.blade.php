@@ -35,7 +35,7 @@
                     </p>
 
                     <div class="mt-8 flex flex-wrap gap-3">
-                        <x-ui.button :href="Nav::contact()" size="lg" icon="arrow-right">
+                        <x-ui.button :href="Nav::link('contact', Nav::contact(), ['service' => $service->slug])" size="lg" icon="arrow-right">
                             {{ __('services_page.show.cta') }}
                         </x-ui.button>
                     </div>

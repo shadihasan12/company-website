@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ScopeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\SetLocale;
 use App\Support\Locale;
@@ -32,6 +35,24 @@ Route::prefix('{locale}')
 
         Route::get('/work', [ProjectController::class, 'index'])->name('work.index');
         Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
+
+        Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+        Route::get('/contact/thank-you', [ContactController::class, 'thanks'])->name('contact.thanks');
+
+        // Rate limited per IP. Lead forms are the only public write path on
+        // the site, so they are the only thing worth flooding.
+        Route::post('/contact', [ContactController::class, 'store'])
+            ->middleware('throttle:6,1')
+            ->name('contact.store');
+
+        Route::post('/newsletter', [NewsletterController::class, 'store'])
+            ->middleware('throttle:6,1')
+            ->name('newsletter.store');
+
+        Route::get('/start-a-project', [ScopeController::class, 'show'])->name('scope');
+        Route::post('/start-a-project', [ScopeController::class, 'store'])
+            ->middleware('throttle:6,1')
+            ->name('scope.store');
 
         Route::view('/styleguide', 'pages.styleguide')->name('styleguide');
     });

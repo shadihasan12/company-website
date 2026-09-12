@@ -72,5 +72,9 @@
     </main>
 
     <x-layout.footer />
+
+    <x-ui.whatsapp-float />
+
+    @stack('scripts')
 </body>
 </html>

@@ -100,7 +100,7 @@
             <div class="hidden items-center gap-1 lg:flex">
                 <x-ui.language-switcher />
                 <x-ui.theme-toggle />
-                <x-ui.button :href="Nav::contact()" size="sm" class="ms-2">
+                <x-ui.button :href="Nav::start()" size="sm" class="ms-2">
                     {{ __('common.cta_primary') }}
                 </x-ui.button>
             </div>
@@ -160,7 +160,7 @@
 
                 <div class="mt-4 flex items-center justify-between gap-3">
                     <x-ui.language-switcher />
-                    <x-ui.button :href="Nav::contact()" size="sm" class="grow">
+                    <x-ui.button :href="Nav::start()" size="sm" class="grow">
                         {{ __('common.cta_primary') }}
                     </x-ui.button>
                 </div>

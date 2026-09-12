@@ -115,7 +115,11 @@
             </div>
         </div>
 
-        <div class="mt-14 flex flex-col gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div class="mt-12 max-w-md border-t border-hairline pt-8">
+            <x-ui.newsletter-form />
+        </div>
+
+        <div class="mt-12 flex flex-col gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p class="text-xs text-content-subtle">
                 &copy; {{ now()->year }} {{ config('site.legal_name') }}. {{ __('footer.rights') }}
             </p>

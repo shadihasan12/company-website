@@ -142,6 +142,59 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Lead capture
+    |--------------------------------------------------------------------------
+    |
+    | `budget_ranges` and `timelines` are the options offered in the contact
+    | form and the scoping wizard. Keys are stored on the lead; labels live
+    | in lang/{locale}/contact.php.
+    |
+    | `notify` is where new leads are emailed. Defaults to the public
+    | address so a fresh install still reaches somebody.
+    |
+    */
+
+    'leads' => [
+        'notify' => env('LEADS_NOTIFY_EMAIL', env('SITE_EMAIL', 'hello@cleancody.com')),
+
+        'budget_ranges' => ['under-10k', '10k-25k', '25k-60k', 'over-60k', 'unsure'],
+
+        'timelines' => ['asap', '1-3-months', '3-6-months', 'exploring'],
+
+        // Minimum seconds between loading the form and submitting it. Bots
+        // post instantly; people do not.
+        'min_fill_seconds' => 3,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scoping wizard
+    |--------------------------------------------------------------------------
+    |
+    | Drives the multi-step form at /start-a-project. Keys are validated
+    | against these lists server-side and stored on the lead's payload;
+    | labels live in lang/{locale}/estimator.php.
+    |
+    | Note this collects scope, not a price. Publishing an automatic
+    | estimate would mean inventing figures nobody has supplied. Once real
+    | pricing exists, the same answers can drive one.
+    |
+    */
+
+    'estimator' => [
+        'platforms' => ['ios', 'android', 'web', 'admin'],
+
+        'features' => [
+            'accounts', 'payments', 'subscriptions', 'chat', 'calls',
+            'notifications', 'maps', 'offline', 'ai', 'multilingual',
+            'integrations', 'reporting',
+        ],
+
+        'stages' => ['idea', 'designs-ready', 'existing-product', 'rescue'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Delivery process
     |--------------------------------------------------------------------------
     |

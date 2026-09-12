@@ -44,10 +44,14 @@ Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend &
 
 ## Lead capture (Epic 5)
 
-- [ ] SMTP credentials, or a Resend / Mailgun / Postmark account
-- [ ] Cloudflare Turnstile site key + secret
-- [ ] Budget ranges to offer in the contact form dropdown
-- [ ] Booking link (Calendly / Cal.com), if you want one
+- [ ] **SMTP credentials, or Resend / Mailgun / Postmark.** Until these are set, leads are still
+      saved to the database — only the notification email is missing.
+- [ ] **Cloudflare Turnstile site key + secret** (`TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET`).
+      Optional: honeypot, fill-time check and rate limiting run without it.
+- [x] ~~Budget ranges~~ — five bands drafted in `config/site.php` under `leads.budget_ranges`.
+      **Confirm or change them.**
+- [ ] Booking link (Calendly / Cal.com) — set `SITE_BOOKING_URL` and it appears on the contact page.
+- [ ] `LEADS_NOTIFY_EMAIL` if new leads should go somewhere other than the public address.
 
 ## Launch (Epics 7 & 9)
 

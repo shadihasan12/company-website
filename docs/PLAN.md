@@ -305,16 +305,22 @@ does not exist yet. See [NEEDED.md](NEEDED.md).
   reference the team or team size anywhere.*
 - **T4.3** Careers page + application form *(optional)*
 
-### Epic 5 — Lead capture — **the revenue path**
+### Epic 5 — Lead capture ✅ **Complete**
 
-- **T5.1** Contact page: form (name, company, email, phone, service, budget, timeline, message), validation,
-  honeypot + Turnstile, rate limiting, store in `leads`, email notification, thank-you page
-- **T5.2** WhatsApp float button + click-to-call
-- **T5.3** Booking-call embed
-- **T5.4** Newsletter capture
-- **T5.5** **Project cost estimator** (interactive multi-step quiz → estimate + captured lead). High-value
-  differentiator — most competitors don't have this.
-- **T5.6** Lead management in admin + CSV export
+- **T5.1** ✅ Contact page with full validation, three-layer spam defence, rate limiting, database
+  capture, email notification and a thank-you page. Arriving from a service page pre-selects it.
+- **T5.2** ✅ WhatsApp float button (appears past the hero) plus click-to-call and mailto in the aside.
+- **T5.3** ✅ Booking link surfaces automatically once `SITE_BOOKING_URL` is set; hidden until then.
+- **T5.4** ✅ Newsletter capture in the footer, stored as its own lead source.
+- **T5.5** ✅ **Scoping wizard** at `/start-a-project` — six steps capturing service, platforms,
+  features, stage, timeline and budget into the lead payload. All primary CTAs point here.
+  *It captures scope, not a price: publishing an automatic estimate would mean inventing figures.
+  Once real pricing exists the same answers can drive one.*
+- **T5.6** ✅ Lead pipeline in the admin with status filters, a new-lead badge and streaming CSV export
+  of the current filter.
+
+**Spam defence, in layers:** honeypot field, encrypted minimum-fill-time token, per-IP rate limiting,
+and Cloudflare Turnstile which activates automatically once keys are configured.
 
 ### Epic 6 — Insights / blog
 
