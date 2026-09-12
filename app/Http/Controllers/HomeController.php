@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Industry;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Technology;
@@ -28,6 +29,15 @@ class HomeController extends Controller
             'technologies' => Technology::ordered()->get()->groupBy('category'),
             // Empty until real quotes arrive — the section hides itself
             // rather than shipping invented social proof.
+            // Only sectors with published work — the section claims
+            // experience, so it must be backed by a case study.
+            'industries' => Industry::ordered()
+                // whereHas rather than having(): withCount compiles to a
+                // correlated subquery, not an aggregate, so HAVING has
+                // nothing to group on.
+                ->whereHas('projects', fn ($query) => $query->published())
+                ->withCount(['projects' => fn ($query) => $query->published()])
+                ->get(),
             'testimonials' => Testimonial::featured()->ordered()->with('client')->take(3)->get(),
             'featuredProjects' => Project::published()
                 ->featured()

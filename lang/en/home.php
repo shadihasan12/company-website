@@ -82,6 +82,20 @@ return [
         'rating' => '{1} :count out of 5|[2,*] :count out of 5',
     ],
 
+    'industries' => [
+        'eyebrow' => 'Industries',
+        'title' => 'Where our work already runs.',
+        'subhead' => 'Every sector here is backed by something we actually shipped.',
+        'count' => '{0} No case studies yet|{1} :count case study|[2,*] :count case studies',
+    ],
+
+    'cta' => [
+        'title' => 'Tell us what you are building.',
+        'subhead' => 'Send over the idea, the half-finished project, or the system nobody wants to touch. We will tell you honestly whether we are the right people for it.',
+        'primary' => 'Start a project',
+        'reassurance' => 'A reply within one working day. No sales sequence.',
+    ],
+
     'work' => [
         'eyebrow' => 'Selected work',
         'title' => 'Shipped, reviewed, and in real hands.',

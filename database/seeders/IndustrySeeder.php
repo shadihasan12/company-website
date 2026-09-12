@@ -10,21 +10,24 @@ class IndustrySeeder extends Seeder
     public function run(): void
     {
         $industries = [
-            'consumer-ai' => 'Consumer AI',
-            'community' => 'Community & Non-profit',
-            'fintech' => 'Fintech & Payments',
-            'retail' => 'E-commerce & Retail',
-            'mobility' => 'Transport & Mobility',
-            'health' => 'Health & Fitness',
-            'hospitality' => 'Hospitality',
+            'consumer-ai' => ['Consumer AI', 'sparkles'],
+            'community' => ['Community & Non-profit', 'users'],
+            'fintech' => ['Fintech & Payments', 'credit-card'],
+            'retail' => ['E-commerce & Retail', 'shopping-bag'],
+            'mobility' => ['Transport & Mobility', 'truck'],
+            'health' => ['Health & Fitness', 'heart'],
+            'hospitality' => ['Hospitality', 'building'],
         ];
 
-        foreach (array_values(array_keys($industries)) as $index => $slug) {
+        $index = 0;
+
+        foreach ($industries as $slug => [$name, $icon]) {
             Industry::updateOrCreate(
                 ['slug' => $slug],
                 [
-                    'name' => ['en' => $industries[$slug]],
-                    'sort_order' => $index,
+                    'name' => ['en' => $name],
+                    'icon' => $icon,
+                    'sort_order' => $index++,
                 ],
             );
         }

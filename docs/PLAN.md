@@ -241,7 +241,7 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
   Panel access is gated on `users.is_admin` — authentication alone is not enough.
   Create an admin with `php artisan make:admin <email>`.
 
-### Epic 1 — Homepage
+### Epic 1 — Homepage ✅ **Complete**
 
 - **T1.1** ✅ **Done.** Hero: eyebrow, headline with gradient accent, subhead, dual CTA, live shipped
   count, scroll cue. Animated orbit rings echoing the logo mark plus drifting brand glows — transform
@@ -267,8 +267,10 @@ Epics are ordered by dependency. Ask for tasks one at a time — e.g. "do T0.1".
 - **T1.8** ✅ **Built, and currently hidden.** Testimonial cards with rating, quote, photo or
   initials, name, title and client. Renders nothing until real quotes exist — never seeded, because
   fabricated social proof on a live site is a liability. Only clients we may name are credited.
-- **T1.9** Industries we serve
-- **T1.10** Closing CTA band + named contact person
+- **T1.9** ✅ **Done.** Industries grid with icons and a live case-study count. Only sectors with
+  published work appear — the section asserts experience, so it must be backed by a case study.
+- **T1.10** ✅ **Done.** Closing CTA band with gradient ring, orbit glows, primary CTA and WhatsApp.
+  *Named contact person dropped — the site references no individuals.*
 
 ### Epic 2 — Services
 

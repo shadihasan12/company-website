@@ -14,4 +14,8 @@
     <x-sections.tech :technologies="$technologies" />
 
     <x-sections.testimonials :testimonials="$testimonials" />
+
+    <x-sections.industries :industries="$industries" />
+
+    <x-sections.cta />
 </x-layouts.app>
