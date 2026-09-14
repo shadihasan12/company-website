@@ -30,17 +30,15 @@ export default defineConfig({
                     preload: [{ weight: 700 }],
                     optimizedFallbacks: true,
                 }),
-                // Arabic face — deferred along with the Arabic locale.
-                // Uncomment together with the `ar` entry in config/site.php.
-                // Not preloaded even when active: it is only used on /ar, and
-                // preloading it globally would waste bandwidth on /en.
-                //
-                // bunny('IBM Plex Sans Arabic', {
-                //     weights: [400, 500, 600, 700],
-                //     subsets: ['arabic', 'latin'],
-                //     preload: false,
-                //     optimizedFallbacks: true,
-                // }),
+                // Arabic face. Not preloaded: it is only requested on /ar,
+                // and preloading it globally would cost English visitors
+                // ~90KB they never use.
+                bunny('IBM Plex Sans Arabic', {
+                    weights: [400, 500, 600, 700],
+                    subsets: ['arabic', 'latin'],
+                    preload: false,
+                    optimizedFallbacks: true,
+                }),
             ],
         }),
         tailwindcss(),

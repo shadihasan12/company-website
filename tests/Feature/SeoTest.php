@@ -143,9 +143,14 @@ class SeoTest extends TestCase
             ->assertSee('name="twitter:card" content="summary"', escape: false);
     }
 
-    public function test_hreflang_is_omitted_while_only_one_locale_is_live(): void
+    public function test_hreflang_links_both_locales_and_a_default(): void
     {
-        $this->get('/en')->assertOk()->assertDontSee('hreflang=', escape: false);
+        $this->get('/en/services/erp')
+            ->assertOk()
+            ->assertSee('hreflang="en"', escape: false)
+            ->assertSee('hreflang="ar"', escape: false)
+            ->assertSee('hreflang="x-default"', escape: false)
+            ->assertSee(url('/ar/services/erp'), escape: false);
     }
 
     public function test_the_sitemap_lists_public_pages_and_published_records(): void

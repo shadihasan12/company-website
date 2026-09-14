@@ -15,9 +15,16 @@ class LocalizationTest extends TestCase
         $this->get('/')->assertRedirect('/en');
     }
 
+    public function test_root_honours_a_supported_browser_language(): void
+    {
+        $this->withHeader('Accept-Language', 'ar,en;q=0.8')
+            ->get('/')
+            ->assertRedirect('/ar');
+    }
+
     public function test_root_falls_back_when_an_unsupported_language_is_requested(): void
     {
-        $this->withHeader('Accept-Language', 'ar,de;q=0.8')
+        $this->withHeader('Accept-Language', 'de-DE,de;q=0.9')
             ->get('/')
             ->assertRedirect('/en');
     }
@@ -32,8 +39,7 @@ class LocalizationTest extends TestCase
 
     public function test_only_configured_locales_resolve(): void
     {
-        // Arabic is deferred: the plumbing remains but the locale is off.
-        $this->get('/ar')->assertNotFound();
+        $this->get('/ar')->assertOk();
         $this->get('/fr')->assertNotFound();
     }
 
@@ -42,11 +48,11 @@ class LocalizationTest extends TestCase
         $this->get('/en/styleguide')->assertOk()->assertSee('Design system');
     }
 
-    public function test_the_deferred_arabic_font_is_never_shipped(): void
+    public function test_the_arabic_font_is_never_shipped_to_english_pages(): void
     {
-        // The Arabic face is ~90KB. While Arabic is off it must not appear
-        // in the build output or the page.
+        // The Arabic face is ~90KB and English visitors never need it.
         $this->get('/en')->assertDontSee('ibm-plex-sans-arabic', escape: false);
+        $this->get('/ar')->assertSee('ibm-plex-sans-arabic', escape: false);
     }
 
     public function test_the_brand_name_renders_from_configuration(): void

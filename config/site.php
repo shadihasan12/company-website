@@ -34,16 +34,13 @@ return [
     | The key is the URL prefix and the Laravel locale. `dir` drives the
     | document direction, which every layout and animation reads from.
     |
-    | Arabic is deferred. The RTL machinery stays in place — logical CSS
-    | properties, direction-aware animations, `lang/ar/*`, the switcher and
-    | the font-loading split — so enabling it later is a content pass, not a
-    | rebuild. Do NOT strip that work out; re-adding it is expensive.
+    | Both locales are live. Everything is RTL-aware: logical CSS
+    | properties, direction-aware animations, a mirrored language switcher
+    | and a font-loading split that keeps the ~90KB Arabic face off English
+    | pages.
     |
-    | To switch Arabic on:
-    |   1. Uncomment the `ar` entry below.
-    |   2. Uncomment the IBM Plex Sans Arabic block in vite.config.js and
-    |      rebuild. Without this the site still works, but Arabic renders in
-    |      the Latin fallback face.
+    | Removing a locale here is all it takes to switch one off — the route
+    | pattern accepts both and SetLocale rejects anything not listed.
     |
     */
 
@@ -55,13 +52,12 @@ return [
             'hreflang' => 'en',
         ],
 
-        // Uncomment to bring Arabic online (see also vite.config.js).
-        // 'ar' => [
-        //     'name' => 'Arabic',
-        //     'native' => 'العربية',
-        //     'dir' => 'rtl',
-        //     'hreflang' => 'ar',
-        // ],
+        'ar' => [
+            'name' => 'Arabic',
+            'native' => 'العربية',
+            'dir' => 'rtl',
+            'hreflang' => 'ar',
+        ],
     ],
 
     'fallback_locale' => 'en',

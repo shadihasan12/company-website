@@ -1,87 +1,86 @@
 <?php
 
 /*
-| Written to describe what this application actually does — the fields the
-| forms collect, the data stored alongside them, and the third parties
-| involved. It is accurate, not legal advice.
+| مكتوبة لتصف ما يفعله هذا التطبيق فعلًا: الحقول التي تجمعها النماذج،
+| والبيانات المخزّنة معها، والأطراف الخارجية المشاركة. وصف دقيق، لا
+| استشارة قانونية.
 |
-| TODO markers below are detected by `php artisan launch:check`, which
-| blocks until they are replaced. Have a lawyer review both documents and
-| fill in the registration details before going live.
+| علامات TODO أدناه يرصدها `php artisan launch:check` ويمنع الإطلاق حتى
+| تُستبدل. راجع المستندين مع محامٍ وأضف بيانات السجل التجاري قبل النشر.
 */
 
 return [
-    'updated' => 'Last updated',
+    'updated' => 'آخر تحديث',
     'review_notice' => 'TODO-LEGAL-REVIEW',
 
     'privacy' => [
-        'title' => 'Privacy policy',
-        'intro' => 'This policy explains what :company collects through this website, why, and what you can ask us to do about it.',
+        'title' => 'سياسة الخصوصية',
+        'intro' => 'توضّح هذه السياسة ما تجمعه :company عبر هذا الموقع، ولماذا، وما الذي يمكنك أن تطلب منّا فعله بشأنه.',
 
         'sections' => [
             [
-                'heading' => 'What you send us',
-                'body' => 'When you use the contact form we collect your name, email address and message, and — if you choose to provide them — your phone number, company, the service you are interested in, your budget range and your timeline. The project scoping form additionally records the platforms, features and project stage you select. The newsletter form collects only an email address. If a careers page is open, an application collects your name, email, the role you are interested in, a link you provide and your message.',
+                'heading' => 'ما ترسله إلينا',
+                'body' => 'عند استخدام نموذج التواصل نجمع اسمك وبريدك الإلكتروني ورسالتك، وكذلك — إن اخترت تزويدنا بها — رقم هاتفك واسم شركتك والخدمة التي تهمّك ونطاق ميزانيتك وإطارك الزمني. ويسجّل نموذج تحديد نطاق المشروع إضافةً إلى ذلك المنصات والمزايا ومرحلة المشروع التي تختارها. أما نموذج النشرة البريدية فيجمع البريد الإلكتروني وحده. وإن كانت صفحة الوظائف مفتوحة، فإن التقديم يجمع اسمك وبريدك والدور الذي يهمّك ورابطًا تزوّدنا به ورسالتك.',
             ],
             [
-                'heading' => 'What we record automatically',
-                'body' => 'With each submission we store your IP address, browser user agent, the page you came from and the language you were browsing in. These are used to detect automated submissions and to limit how often a single source can submit. We do not build profiles from them and we do not use them for advertising.',
+                'heading' => 'ما نسجّله تلقائيًا',
+                'body' => 'نخزّن مع كل إرسال عنوان IP الخاص بك ومعرّف المتصفح والصفحة التي جئت منها ولغة التصفّح. تُستخدم هذه البيانات لاكتشاف الإرسال الآلي وللحدّ من عدد المرات التي يمكن فيها لمصدر واحد الإرسال. ولا نبني منها ملفات تعريف ولا نستخدمها لأغراض إعلانية.',
             ],
             [
-                'heading' => 'Cookies and local storage',
-                'body' => 'The site sets a session cookie so forms can be submitted securely, and stores your light or dark theme preference in your browser. Neither is used for tracking. If analytics is enabled, that provider may set its own cookies; where we use Plausible, no cookies are set and no personal data is collected.',
+                'heading' => 'ملفات تعريف الارتباط والتخزين المحلي',
+                'body' => 'يضع الموقع ملف ارتباط للجلسة كي يتم إرسال النماذج بأمان، ويحفظ تفضيلك للمظهر الفاتح أو الداكن في متصفحك. ولا يُستخدم أيٌّ منهما للتتبّع. وإن كانت التحليلات مفعّلة فقد يضع مزوّدها ملفات ارتباط خاصة به؛ وحين نستخدم Plausible فلا تُوضع ملفات ارتباط ولا تُجمع بيانات شخصية.',
             ],
             [
-                'heading' => 'Who else is involved',
-                'body' => 'Spam protection may be handled by Cloudflare Turnstile, which receives your IP address to verify that you are not a bot. Email notifications are delivered through our email provider. Analytics, where enabled, is provided by Google Analytics or Plausible. We do not sell your data and we do not share it with anyone else.',
+                'heading' => 'من هي الأطراف الأخرى',
+                'body' => 'قد تتولى الحماية من الإرسال الآلي خدمة Cloudflare Turnstile، وتتلقى عنوان IP للتحقق من أنك لست روبوتًا. وتُرسَل إشعارات البريد عبر مزوّد البريد لدينا. أما التحليلات، حين تكون مفعّلة، فمن Google Analytics أو Plausible. نحن لا نبيع بياناتك ولا نشاركها مع أي جهة أخرى.',
             ],
             [
-                'heading' => 'How long we keep it',
-                'body' => 'Enquiries are kept for as long as they are commercially relevant, and then deleted. You can ask us to delete yours sooner at any time.',
+                'heading' => 'مدة الاحتفاظ',
+                'body' => 'نحتفظ بالطلبات ما دامت ذات صلة تجارية، ثم نحذفها. ويمكنك أن تطلب حذف طلبك قبل ذلك في أي وقت.',
             ],
             [
-                'heading' => 'Your rights',
-                'body' => 'You can ask us for a copy of what we hold about you, ask us to correct it, or ask us to delete it. Email :email and we will respond within thirty days.',
+                'heading' => 'حقوقك',
+                'body' => 'يمكنك أن تطلب نسخة مما نحتفظ به عنك، أو تصحيحه، أو حذفه. راسلنا على :email وسنردّ خلال ثلاثين يومًا.',
             ],
             [
-                'heading' => 'Changes',
-                'body' => 'If this policy changes materially we will update the date at the top of this page.',
+                'heading' => 'التغييرات',
+                'body' => 'إن تغيّرت هذه السياسة تغيّرًا جوهريًا فسنحدّث التاريخ في أعلى هذه الصفحة.',
             ],
         ],
     ],
 
     'terms' => [
-        'title' => 'Terms of use',
-        'intro' => 'These terms cover your use of this website. They do not cover work we carry out for clients, which is governed by a separate signed agreement.',
+        'title' => 'شروط الاستخدام',
+        'intro' => 'تغطي هذه الشروط استخدامك لهذا الموقع. ولا تغطي الأعمال التي ننفّذها للعملاء، فتلك يحكمها اتفاق موقّع منفصل.',
 
         'sections' => [
             [
-                'heading' => 'Using this site',
-                'body' => 'You may browse and share this site freely. You may not attempt to gain unauthorised access to it, interfere with its operation, or submit automated or misleading enquiries through its forms.',
+                'heading' => 'استخدام هذا الموقع',
+                'body' => 'يمكنك تصفّح هذا الموقع ومشاركته بحرية. ولا يجوز محاولة الوصول غير المصرّح به إليه، أو التشويش على عمله، أو إرسال طلبات آلية أو مضلّلة عبر نماذجه.',
             ],
             [
-                'heading' => 'Our work and our clients',
-                'body' => 'Case studies describe work we delivered. Client names appear only where we have permission to name them; where we do not, the client is described without being identified. Product names, logos and trademarks belong to their respective owners.',
+                'heading' => 'أعمالنا وعملاؤنا',
+                'body' => 'تصف دراسات الحالة أعمالًا نفّذناها. ولا تظهر أسماء العملاء إلا حيث لدينا إذن بذكرها؛ وحيث لا إذن، يُوصف العميل دون تعريفه. وأسماء المنتجات والشعارات والعلامات التجارية تعود لأصحابها.',
             ],
             [
-                'heading' => 'Our content',
-                'body' => 'The text, design and code of this site belong to :company unless stated otherwise. You may quote from it with attribution; you may not republish it wholesale.',
+                'heading' => 'محتوانا',
+                'body' => 'النصوص والتصميم والشيفرة في هذا الموقع ملك لـ:company ما لم يُذكر خلاف ذلك. يمكنك الاقتباس منها مع الإسناد، ولا يجوز إعادة نشرها كاملة.',
             ],
             [
-                'heading' => 'Accuracy',
-                'body' => 'We keep this site current, but timelines, capabilities and descriptions are indicative rather than contractual. Nothing here forms an offer or a quotation — a proposal is always made in writing.',
+                'heading' => 'الدقة',
+                'body' => 'نحرص على تحديث هذا الموقع، لكن المدد والقدرات والأوصاف إرشادية لا تعاقدية. ولا يشكّل أي مما هنا عرضًا أو تسعيرة — فالعرض يُقدَّم دائمًا كتابةً.',
             ],
             [
-                'heading' => 'External links',
-                'body' => 'Links to app stores and client websites are provided for reference. We are not responsible for their content.',
+                'heading' => 'الروابط الخارجية',
+                'body' => 'روابط متاجر التطبيقات ومواقع العملاء مُدرجة للاطلاع. ولسنا مسؤولين عن محتواها.',
             ],
             [
-                'heading' => 'Governing law',
-                'body' => 'These terms are governed by the laws of TODO-GOVERNING-LAW.',
+                'heading' => 'القانون الحاكم',
+                'body' => 'تخضع هذه الشروط لقوانين TODO-GOVERNING-LAW.',
             ],
             [
-                'heading' => 'Contact',
-                'body' => 'Questions about these terms can be sent to :email.',
+                'heading' => 'التواصل',
+                'body' => 'يمكن إرسال الأسئلة حول هذه الشروط إلى :email.',
             ],
         ],
     ],
