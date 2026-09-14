@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Rules\Turnstile;
 use App\Support\Seo;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Pre-launch readiness check.
@@ -169,6 +170,31 @@ class LaunchCheck extends Command
         );
 
         $this->assert('At least one testimonial', Testimonial::exists(), blocking: false);
+
+        // A record can point at a file that was deleted or never uploaded,
+        // which renders as a broken image rather than failing loudly.
+        $missing = [];
+
+        foreach (Project::all() as $project) {
+            foreach (array_filter([$project->hero_image_path, ...($project->gallery ?? [])]) as $path) {
+                if (! Storage::disk('public')->exists($path)) {
+                    $missing[] = "{$project->slug}: {$path}";
+                }
+            }
+        }
+
+        foreach (Client::whereNotNull('logo_path')->get() as $client) {
+            if (! Storage::disk('public')->exists($client->logo_path)) {
+                $missing[] = "{$client->slug}: {$client->logo_path}";
+            }
+        }
+
+        $this->assert(
+            $missing === []
+                ? 'All referenced images exist'
+                : count($missing).' referenced image(s) missing: '.implode(', ', array_slice($missing, 0, 3)),
+            $missing === [],
+        );
     }
 
     protected function assert(string $label, bool $passed, bool $blocking = true): void

@@ -99,9 +99,16 @@ class ImportStoreScreenshots extends Command
         $this->components->twoColumnDetail('  Kept', (string) count($stored).' screenshot(s)');
 
         if (! $this->option('dry-run')) {
+            // On --force the old gallery files are gone, so a hero that
+            // pointed into them has to be repointed too. Keeping it only
+            // when the file still exists left every project with a broken
+            // hero after the first re-import.
+            $heroStillValid = filled($project->hero_image_path)
+                && Storage::disk('public')->exists($project->hero_image_path);
+
             $project->update([
                 'gallery' => $stored,
-                'hero_image_path' => $project->hero_image_path ?? $stored[0],
+                'hero_image_path' => $heroStillValid ? $project->hero_image_path : $stored[0],
             ]);
         }
     }

@@ -4,11 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Lead;
 use App\Models\Post;
+use App\Models\Project;
 use App\Models\Testimonial;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class LaunchTest extends TestCase
@@ -102,6 +104,35 @@ class LaunchTest extends TestCase
     public function test_launch_check_is_only_advisory_without_strict(): void
     {
         $this->artisan('launch:check')->assertSuccessful();
+    }
+
+    public function test_launch_check_reports_an_image_a_record_points_at_but_that_is_missing(): void
+    {
+        // A deleted or never-uploaded file renders as a broken image rather
+        // than failing loudly, so it has to be caught here.
+        Project::query()->first()->update([
+            'gallery' => ['projects/gallery/does-not-exist.webp'],
+        ]);
+
+        $this->artisan('launch:check')
+            ->expectsOutputToContain('referenced image(s) missing')
+            ->assertSuccessful();
+    }
+
+    public function test_launch_check_passes_media_when_every_file_exists(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('projects/gallery/one.webp', 'x');
+
+        Project::query()->update(['gallery' => null, 'hero_image_path' => null]);
+        Project::query()->first()->update([
+            'gallery' => ['projects/gallery/one.webp'],
+            'hero_image_path' => 'projects/gallery/one.webp',
+        ]);
+
+        $this->artisan('launch:check')
+            ->expectsOutputToContain('All referenced images exist')
+            ->assertSuccessful();
     }
 
     public function test_the_content_audit_still_runs(): void
