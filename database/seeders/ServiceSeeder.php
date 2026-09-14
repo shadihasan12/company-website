@@ -16,8 +16,16 @@ class ServiceSeeder extends Seeder
         $locales = array_keys(config('site.locales'));
         $fallback = config('site.fallback_locale');
 
+        // Seeders bootstrap; the admin owns the content afterwards.
+        // SEED_REFRESH=true resets to the seeded copy deliberately.
+        $refresh = filter_var(env('SEED_REFRESH', false), FILTER_VALIDATE_BOOL);
+
         foreach (config('site.services') as $index => $service) {
             $key = $service['key'];
+
+            if (! $refresh && Service::where('key', $key)->exists()) {
+                continue;
+            }
 
             Service::updateOrCreate(
                 ['key' => $key],

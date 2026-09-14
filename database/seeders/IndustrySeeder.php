@@ -19,9 +19,19 @@ class IndustrySeeder extends Seeder
             'hospitality' => ['Hospitality', 'الضيافة', 'building'],
         ];
 
+        // Seeders bootstrap; the admin owns the content afterwards.
+        // SEED_REFRESH=true resets to the seeded copy deliberately.
+        $refresh = filter_var(env('SEED_REFRESH', false), FILTER_VALIDATE_BOOL);
+
         $index = 0;
 
         foreach ($industries as $slug => [$name, $arabicName, $icon]) {
+            if (! $refresh && Industry::where('slug', $slug)->exists()) {
+                $index++;
+
+                continue;
+            }
+
             Industry::updateOrCreate(
                 ['slug' => $slug],
                 [

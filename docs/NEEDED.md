@@ -57,6 +57,23 @@ Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend &
 - [ ] **Decision needed:** ERP and Custom Systems have zero case studies behind them.
       Send covering work, drop the service, or present it as a capability-only page.
 
+## Website case studies — **need your input**
+
+Four are live with a captured screenshot each: Mirsam, Nova Dental Care,
+Ethos Music Academy, Ethos Greek Bistro.
+
+Their summaries describe only what each site verifiably **is**, taken from the site itself.
+Nobody has told me what Clean Cody actually built, so these are all empty:
+
+- [ ] What you built and how (`solution`) — the only field that makes it a case study
+- [ ] Tech stack per site
+- [ ] Real client names, and permission to name them (all four are the business name as a placeholder)
+- [ ] Results with numbers
+- [ ] **Honeystone is deliberately not added.** That link is another agency's own portfolio page,
+      describing work *they* did with *their* client testimonial. If Clean Cody built it as a
+      subcontractor, send the live URL (`mobilephonetradein.co.uk`) and say so.
+- [ ] **Weather Live°** is published by Mosaic S.r.l. and is not in the CV — what was your role?
+
 ## Portfolio (Epic 3) — the largest quality gap
 
 - [x] ~~Screenshots for the five store-listed apps~~ — imported from the App Store and Google Play

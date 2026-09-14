@@ -292,3 +292,7 @@ ready.then(() => {
     initCountUps();
     ScrollTrigger.refresh();
 });
+
+// TEMP DEBUG
+window.gsap = gsap;
+window.ScrollTrigger = ScrollTrigger;

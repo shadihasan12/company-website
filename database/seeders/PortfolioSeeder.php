@@ -29,7 +29,24 @@ class PortfolioSeeder extends Seeder
 {
     public function run(): void
     {
+        $refresh = filter_var(env('SEED_REFRESH', false), FILTER_VALIDATE_BOOL);
+
         foreach ($this->projects() as $index => $data) {
+            $existing = Project::where('slug', $data['slug'])->exists();
+
+            // Seeders bootstrap; the admin panel owns the content after
+            // that. Overwriting an existing project would discard uploaded
+            // screenshots, metrics and copy the client has since edited —
+            // which is exactly what happened once here. Pass SEED_REFRESH=true
+            // to deliberately reset a project to its seeded state.
+            if ($existing && ! $refresh) {
+                $this->command?->getOutput()->writeln(
+                    "  <fg=gray>skipped {$data['slug']} (already seeded — SEED_REFRESH=true to reset)</>",
+                );
+
+                continue;
+            }
+
             $client = Client::updateOrCreate(
                 ['slug' => $data['client_slug']],
                 [
@@ -83,6 +100,7 @@ class PortfolioSeeder extends Seeder
         return [
             [
                 'slug' => 'hollo-ai',
+                'app_store_url' => 'https://apps.apple.com/us/app/hollo-ai-the-twin-platform/id6744967081',
                 'name' => 'Hollo AI — The Twin Platform',
                 'client_slug' => 'northwind-ai',
                 'client_name' => 'Northwind AI',
@@ -97,6 +115,7 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'slug' => 'nam-community',
+                'google_play_url' => 'https://play.google.com/store/apps/details?id=com.aftersunday.nam',
                 'name' => 'NAM — Your Maronite Community',
                 'client_slug' => 'cedar-community-foundation',
                 'client_name' => 'Cedar Community Foundation',
@@ -111,6 +130,7 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'slug' => 'wakil-topup',
+                'google_play_url' => 'https://play.google.com/store/apps/details?id=com.wakel.topups',
                 'name' => 'Wakil Topup',
                 'client_slug' => 'topline-digital',
                 'client_name' => 'Topline Digital',
@@ -126,6 +146,7 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'slug' => 'al-bustan',
+                'app_store_url' => 'https://apps.apple.com/app/al-bustan/id6741899106',
                 'name' => 'Al Bustan',
                 'client_slug' => 'bustan-retail-group',
                 'client_name' => 'Bustan Retail Group',
@@ -168,6 +189,7 @@ class PortfolioSeeder extends Seeder
             ],
             [
                 'slug' => 'reserva',
+                'app_store_url' => 'https://apps.apple.com/us/app/reserva/id1668653527',
                 'name' => 'Reserva',
                 'client_slug' => 'reserva-hospitality',
                 'client_name' => 'Reserva Hospitality',
