@@ -59,8 +59,12 @@ Per service — mobile apps, web, dashboards, custom systems, ERP, AI, backend &
 
 ## Portfolio (Epic 3) — the largest quality gap
 
-- [ ] **Screenshots — 3–8 per project.** Currently zero. Single biggest upgrade available.
-- [ ] Store / live URLs for the six projects missing them (`wakilcard.com` is on file)
+- [x] ~~Screenshots for the five store-listed apps~~ — imported from the App Store and Google Play
+      with `php artisan portfolio:import-screenshots`, downscaled and re-encoded to WebP.
+      **Still needed:** Captain Car and Reset have no store link, so no screenshots.
+- [ ] **Permission to publish store screenshots.** They are the publisher's marketing assets, not
+      automatically Clean Cody's — same question as naming the clients.
+- [ ] Store / live URLs for Captain Car and Reset
 - [ ] Results with numbers: downloads, rating, % faster, hours saved, revenue, uptime
 - [ ] Real client names **and written permission to publish them** — all seven are
       placeholders currently set to publish

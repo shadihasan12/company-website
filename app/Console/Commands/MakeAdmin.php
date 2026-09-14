@@ -21,8 +21,17 @@ class MakeAdmin extends Command
         $existing = User::where('email', $email)->first();
 
         if ($existing) {
-            $existing->update(['is_admin' => true]);
-            $this->components->info("Promoted [{$email}] to admin.");
+            $existing->update(array_filter([
+                'is_admin' => true,
+                // A supplied password resets an existing account too;
+                // silently ignoring it made this command useless for the
+                // one thing it is most often needed for.
+                'password' => $this->option('password'),
+            ]));
+
+            $this->components->info($this->option('password')
+                ? "Promoted [{$email}] and reset the password."
+                : "Promoted [{$email}] to admin.");
 
             return self::SUCCESS;
         }

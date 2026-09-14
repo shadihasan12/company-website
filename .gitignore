@@ -28,3 +28,9 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Uploaded media — imported or added through the admin panel, not source.
+/storage/app/public/projects
+/storage/app/public/clients
+/storage/app/public/posts
+/storage/app/public/testimonials
