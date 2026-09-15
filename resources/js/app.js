@@ -75,6 +75,20 @@ Alpine.store('theme', {
  * on its own trigger, which keeps ScrollTrigger instance counts low.
  * ---------------------------------------------------------------------- */
 
+/**
+ * Every reveal is a `fromTo`, never a `from`, and every one hands the
+ * element back to CSS when it finishes.
+ *
+ * `from()` reads the element's *current* value as the destination, and it
+ * reads it lazily, at the moment that element's slice of the stagger
+ * starts. Any CSS transition covering opacity is still mid-flight at that
+ * point, so the destination it captured was a fraction rather than 1 and
+ * the card stopped fading there — permanently. Stating both ends removes
+ * the guesswork; `clearProps` then drops the inline transform GSAP leaves
+ * behind, which would otherwise outrank the hover-lift utility class.
+ */
+const REVEAL_CLEAR = 'opacity,transform,translate,rotate,scale';
+
 function initReveal() {
     if (prefersReducedMotion) {
         // Elements are visible by default in CSS, so there is nothing to undo.
@@ -85,16 +99,29 @@ function initReveal() {
 
     gsap.utils.toArray('[data-reveal]').forEach((el) => {
         const axis = el.dataset.reveal || 'up';
-        const from = { opacity: 0, duration: 0.8, ease: 'expo.out' };
+        const from = { opacity: 0 };
+        const to = { opacity: 1 };
 
-        if (axis === 'up') from.y = 32;
-        if (axis === 'down') from.y = -32;
-        if (axis === 'start') from.x = -40 * dir;
-        if (axis === 'end') from.x = 40 * dir;
-        if (axis === 'scale') from.scale = 0.94;
+        if (axis === 'up' || axis === 'down') {
+            from.y = axis === 'up' ? 32 : -32;
+            to.y = 0;
+        }
 
-        gsap.from(el, {
-            ...from,
+        if (axis === 'start' || axis === 'end') {
+            from.x = (axis === 'start' ? -40 : 40) * dir;
+            to.x = 0;
+        }
+
+        if (axis === 'scale') {
+            from.scale = 0.94;
+            to.scale = 1;
+        }
+
+        gsap.fromTo(el, from, {
+            ...to,
+            duration: 0.8,
+            ease: 'expo.out',
+            clearProps: REVEAL_CLEAR,
             scrollTrigger: {
                 trigger: el,
                 start: 'top 88%',
@@ -104,21 +131,28 @@ function initReveal() {
     });
 
     gsap.utils.toArray('[data-reveal-group]').forEach((group) => {
-        const children = group.children;
+        // A static copy: `children` is a live collection and GSAP holds the
+        // target list for the life of the tween.
+        const children = gsap.utils.toArray(group.children);
         if (!children.length) return;
 
-        gsap.from(children, {
-            opacity: 0,
-            y: 28,
-            duration: 0.7,
-            ease: 'expo.out',
-            stagger: 0.08,
-            scrollTrigger: {
-                trigger: group,
-                start: 'top 85%',
-                once: true,
+        gsap.fromTo(
+            children,
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: 'expo.out',
+                stagger: 0.08,
+                clearProps: REVEAL_CLEAR,
+                scrollTrigger: {
+                    trigger: group,
+                    start: 'top 85%',
+                    once: true,
+                },
             },
-        });
+        );
     });
 }
 
@@ -292,7 +326,3 @@ ready.then(() => {
     initCountUps();
     ScrollTrigger.refresh();
 });
-
-// TEMP DEBUG
-window.gsap = gsap;
-window.ScrollTrigger = ScrollTrigger;

@@ -5,7 +5,7 @@ Extracted from the supplied CV.
 Ready to seed in **T0.2**. Client names are placeholders per your instruction and become
 editable from the admin panel in T0.3. Nothing here references the team or team size.
 
-> **Seeded as of T0.2.** All seven projects are in the database with their real stacks, services and
+> **Seeded as of T0.2.** All six projects are in the database with their real stacks, services and
 > industries. Run `php artisan content:audit` at any time for a live list of what is still missing.
 >
 > **Deliberately not seeded:** metrics, testimonials and blog posts. No figures were supplied, and
@@ -34,19 +34,7 @@ editable from the admin panel in T0.3. Nothing here references the team or team 
 - **Screenshots:** ❌ needed
 - **Results:** ❌ needed — downloads, rating, concurrent sessions, latency
 
-### 2. NAM — Your Maronite Community
-- **Placeholder client:** Cedar Community Foundation
-- **Category:** Mobile app · AI solutions · Backend
-- **Industry:** Community / non-profit
-- **Stack:** Flutter, Firebase (FCM), AWS Rekognition, BLoC, Node.js
-- **Summary:** Community platform with real-time chat, events with face-search photo matching,
-  an AI assistant and push notifications.
-- **Links:** App Store, Google Play *(URLs needed)*
-- **Screenshots:** ❌ needed
-- **Results:** ❌ needed — members, photos matched, engagement
-- **Note:** strongest AI story in the set — face recognition plus an assistant in one shipped app.
-
-### 3. Wakil Topup
+### 2. Wakil Topup
 - **Placeholder client:** Topline Digital
 - **Category:** Mobile app · Website · Dashboard
 - **Industry:** Fintech / payments
@@ -59,7 +47,7 @@ editable from the admin panel in T0.3. Nothing here references the team or team 
 - **Note:** the only project currently covering mobile + web + dashboard in one story. Good
   candidate for the featured slot on the homepage.
 
-### 4. Al Bustan
+### 3. Al Bustan
 - **Placeholder client:** Bustan Retail Group
 - **Category:** Mobile app · Backend
 - **Industry:** E-commerce / retail
@@ -69,7 +57,7 @@ editable from the admin panel in T0.3. Nothing here references the team or team 
 - **Links:** Google Play *(URL needed)*
 - **Screenshots:** ❌ needed
 
-### 5. Captain Car
+### 4. Captain Car
 - **Placeholder client:** Metro Mobility
 - **Category:** Mobile app
 - **Industry:** Transport / mobility
@@ -79,7 +67,7 @@ editable from the admin panel in T0.3. Nothing here references the team or team 
 - **Links:** Google Play *(URL needed)*
 - **Screenshots:** ❌ needed
 
-### 6. Reset — Lasting Weight Loss
+### 5. Reset — Lasting Weight Loss
 - **Placeholder client:** Reset Health
 - **Category:** Mobile app
 - **Industry:** Health & fitness
@@ -89,7 +77,7 @@ editable from the admin panel in T0.3. Nothing here references the team or team 
 - **Links:** Google Play *(URL needed)*
 - **Screenshots:** ❌ needed
 
-### 7. Reserva
+### 6. Reserva
 - **Placeholder client:** Reserva Hospitality
 - **Category:** Mobile app
 - **Industry:** Hospitality / restaurants
@@ -103,13 +91,13 @@ editable from the admin panel in T0.3. Nothing here references the team or team 
 
 ## Capability coverage
 
-What the seven projects prove, and where the portfolio is thin:
+What the six projects prove, and where the portfolio is thin:
 
 | Service | Covered by | Strength |
 |---|---|---|
-| Mobile apps | All seven | Very strong |
-| AI solutions | Hollo AI, NAM | Strong |
-| Backend & cloud | NAM, Al Bustan, Hollo AI | Good |
+| Mobile apps | All six | Very strong |
+| AI solutions | Hollo AI | **Thin — one example** |
+| Backend & cloud | Al Bustan, Hollo AI | Good |
 | Websites | Wakil Topup (wakilcard.com) | **Thin — one example** |
 | Dashboards | Wakil Topup admin | **Thin — one example** |
 | Custom systems | — | **Not covered** |

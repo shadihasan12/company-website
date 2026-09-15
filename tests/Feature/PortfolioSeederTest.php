@@ -23,8 +23,15 @@ class PortfolioSeederTest extends TestCase
 
     public function test_it_seeds_every_project_from_the_cv(): void
     {
-        $this->assertSame(7, Project::count());
-        $this->assertSame(3, Project::featured()->count());
+        $this->assertSame(6, Project::count());
+
+        // The homepage work section renders the featured set and nothing
+        // else, so this list is what visitors see above "all work", in
+        // this order.
+        $this->assertSame(
+            ['captain-car', 'wakil-topup', 'reset-weight-loss'],
+            Project::featured()->ordered()->pluck('slug')->all(),
+        );
     }
 
     public function test_services_match_the_navigation_configuration(): void

@@ -19,20 +19,31 @@
             <h2 class="font-display text-2xl font-bold sm:text-3xl">{{ $title }}</h2>
         @endif
 
-        <ul @class(['grid gap-4', 'mt-8' => $title, 'sm:grid-cols-2 lg:grid-cols-3' => $images->count() > 1])>
+        <ul @class([
+            'grid gap-4',
+            'mt-8' => $title,
+            'sm:grid-cols-2 lg:grid-cols-3' => $images->count() > 1,
+            // A lone screenshot stretched to the full container is taller
+            // than the viewport; hold it to one column's width instead.
+            'mx-auto max-w-lg' => $images->count() === 1,
+        ])>
             @foreach ($urls as $index => $url)
                 <li>
                     <button
                         type="button"
                         x-on:click="open({{ $index }})"
-                        class="group block w-full overflow-hidden rounded-xl bg-surface-sunken ring-1 ring-hairline transition-all duration-300 hover:ring-brand-400/40"
+                        class="group block w-full overflow-hidden rounded-xl bg-surface-sunken p-3 ring-1 ring-hairline transition-[box-shadow] duration-300 hover:ring-brand-400/40"
                     >
+                        {{-- These are app screenshots, mostly portrait. Cropped
+                             to fill a landscape tile they showed a slice of one
+                             screen and nothing legible, so the tile is portrait
+                             and the shot is contained inside it whole. --}}
                         <img
                             src="{{ $url }}"
                             alt="{{ __('work.gallery.screenshot', ['number' => $index + 1]) }}"
                             loading="lazy"
                             decoding="async"
-                            class="aspect-4/3 w-full object-cover transition-transform duration-500 ease-out-expo group-hover:scale-[1.03]"
+                            class="aspect-3/4 w-full rounded-lg object-contain transition-transform duration-500 ease-out-expo group-hover:scale-[1.03]"
                         >
                     </button>
                 </li>

@@ -58,10 +58,16 @@ class Project extends Model
         return $this->belongsToMany(Service::class);
     }
 
-    /** @return BelongsToMany<Technology, $this> */
+    /**
+     * Ordered, because the card shows only the first few: without this the
+     * chips come back in technology id order, which is the order rows
+     * happened to be created in and put newly added entries last.
+     *
+     * @return BelongsToMany<Technology, $this>
+     */
     public function technologies(): BelongsToMany
     {
-        return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany(Technology::class)->orderBy('technologies.sort_order');
     }
 
     /** @return HasMany<Testimonial, $this> */

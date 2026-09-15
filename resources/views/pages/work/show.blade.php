@@ -96,14 +96,22 @@
 
             @if ($project->hero_image_path)
                 {{-- Above the fold and usually the LCP element, so it is
-                     fetched eagerly and at high priority. --}}
-                <img
-                    src="{{ \Illuminate\Support\Facades\Storage::url($project->hero_image_path) }}"
-                    alt="{{ $project->name }}"
-                    fetchpriority="high"
-                    decoding="async"
-                    class="mt-12 w-full rounded-2xl object-cover ring-1 ring-hairline"
-                >
+                     fetched eagerly and at high priority.
+
+                     Most heroes are portrait phone screenshots. Left at
+                     `w-full` one fills the container width and runs to
+                     roughly 2,500px tall, so the frame caps the height and
+                     the image is contained inside it at its own aspect
+                     ratio — wide desktop captures included. --}}
+                <div class="mt-12 grid max-h-[70vh] place-items-center overflow-hidden rounded-2xl bg-surface-sunken p-4 ring-1 ring-hairline sm:p-6">
+                    <img
+                        src="{{ \Illuminate\Support\Facades\Storage::url($project->hero_image_path) }}"
+                        alt="{{ $project->name }}"
+                        fetchpriority="high"
+                        decoding="async"
+                        class="max-h-[calc(70vh-3rem)] w-auto max-w-full rounded-xl object-contain"
+                    >
+                </div>
             @endif
         </x-ui.container>
     </x-ui.section>
