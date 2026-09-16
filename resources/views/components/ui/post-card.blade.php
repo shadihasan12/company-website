@@ -10,7 +10,7 @@
     <div class="relative aspect-16/10 overflow-hidden rounded-xl bg-surface-sunken">
         @if ($post->cover_image_path)
             <img
-                src="{{ Storage::url($post->cover_image_path) }}"
+                src="{{ \App\Support\Media::url($post->cover_image_path) }}"
                 alt=""
                 loading="lazy"
                 decoding="async"

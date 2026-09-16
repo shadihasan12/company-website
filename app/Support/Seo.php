@@ -3,7 +3,6 @@
 namespace App\Support;
 
 use App\Models\Testimonial;
-use Illuminate\Support\Facades\Storage;
 
 class Seo
 {
@@ -44,7 +43,7 @@ class Seo
     public static function image(?string $path = null): ?string
     {
         if (filled($path)) {
-            return url(Storage::url($path));
+            return url(Media::url($path));
         }
 
         $default = config('site.og_image');

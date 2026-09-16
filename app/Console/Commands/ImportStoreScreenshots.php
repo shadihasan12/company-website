@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Project;
+use App\Support\Media;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -104,7 +104,7 @@ class ImportStoreScreenshots extends Command
             // when the file still exists left every project with a broken
             // hero after the first re-import.
             $heroStillValid = filled($project->hero_image_path)
-                && Storage::disk('public')->exists($project->hero_image_path);
+                && Media::exists($project->hero_image_path);
 
             $project->update([
                 'gallery' => $stored,
@@ -237,7 +237,7 @@ class ImportStoreScreenshots extends Command
         ));
 
         if (! $this->option('dry-run')) {
-            Storage::disk('public')->put($path, $optimised ?? $binary);
+            Media::put($path, $optimised ?? $binary);
         }
 
         return $path;

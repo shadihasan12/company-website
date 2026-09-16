@@ -17,6 +17,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Media Disk
+    |--------------------------------------------------------------------------
+    |
+    | Where publicly served uploads live — screenshots, client logos,
+    | avatars. Kept separate from the default disk so media can move to
+    | object storage without also relocating private application files.
+    | Read through App\Support\Media, never directly.
+    |
+    */
+
+    'media' => env('MEDIA_DISK', 'public'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |

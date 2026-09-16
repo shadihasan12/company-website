@@ -51,9 +51,11 @@ class WorkSectionTest extends TestCase
         // The fallback must look deliberate, not like a broken image.
         Project::factory()->featured()->create(['name' => 'No Screenshot Yet']);
 
+        // Scoped to the card's own image: the header and footer carry a
+        // logo <img> of their own, which says nothing about this project.
         $this->get('/en')
             ->assertOk()
-            ->assertDontSee('<img', escape: false)
+            ->assertDontSee('alt="No Screenshot Yet"', escape: false)
             ->assertSee('No Screenshot Yet');
     }
 

@@ -20,7 +20,7 @@
                         @foreach ($clients as $client)
                             <li class="shrink-0">
                                 @php
-                                    $logo = $client->logo_path ? \Illuminate\Support\Facades\Storage::url($client->logo_path) : null;
+                                    $logo = \App\Support\Media::url($client->logo_path);
                                 @endphp
 
                                 <x-dynamic-component

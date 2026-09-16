@@ -1,10 +1,10 @@
 @props(['images', 'title' => null])
 
 @php
-    use Illuminate\Support\Facades\Storage;
+    use App\Support\Media;
 
     $images = collect($images)->filter();
-    $urls = $images->map(fn (string $path) => Storage::url($path))->values();
+    $urls = $images->map(fn (string $path) => Media::url($path))->values();
 @endphp
 
 @if ($images->isNotEmpty())

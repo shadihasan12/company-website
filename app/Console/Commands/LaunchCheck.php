@@ -8,9 +8,9 @@ use App\Models\Project;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Rules\Turnstile;
+use App\Support\Media;
 use App\Support\Seo;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Pre-launch readiness check.
@@ -177,14 +177,14 @@ class LaunchCheck extends Command
 
         foreach (Project::all() as $project) {
             foreach (array_filter([$project->hero_image_path, ...($project->gallery ?? [])]) as $path) {
-                if (! Storage::disk('public')->exists($path)) {
+                if (! Media::exists($path)) {
                     $missing[] = "{$project->slug}: {$path}";
                 }
             }
         }
 
         foreach (Client::whereNotNull('logo_path')->get() as $client) {
-            if (! Storage::disk('public')->exists($client->logo_path)) {
+            if (! Media::exists($client->logo_path)) {
                 $missing[] = "{$client->slug}: {$client->logo_path}";
             }
         }

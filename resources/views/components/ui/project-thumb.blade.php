@@ -10,7 +10,7 @@
 <div {{ $attributes->class(['relative aspect-16/10 overflow-hidden rounded-xl bg-surface-sunken']) }}>
     @if ($image)
         <img
-            src="{{ Storage::url($image) }}"
+            src="{{ \App\Support\Media::url($image) }}"
             alt="{{ $project->name }}"
             loading="lazy"
             decoding="async"

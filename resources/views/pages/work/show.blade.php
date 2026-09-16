@@ -105,7 +105,7 @@
                      ratio — wide desktop captures included. --}}
                 <div class="mt-12 grid max-h-[70vh] place-items-center overflow-hidden rounded-2xl bg-surface-sunken p-4 ring-1 ring-hairline sm:p-6">
                     <img
-                        src="{{ \Illuminate\Support\Facades\Storage::url($project->hero_image_path) }}"
+                        src="{{ \App\Support\Media::url($project->hero_image_path) }}"
                         alt="{{ $project->name }}"
                         fetchpriority="high"
                         decoding="async"

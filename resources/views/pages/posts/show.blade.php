@@ -24,7 +24,7 @@
                 'dateModified' => $post->updated_at?->toIso8601String(),
                 'author' => $post->author_name ? ['@type' => 'Person', 'name' => $post->author_name] : null,
                 'publisher' => ['@type' => 'Organization', 'name' => config('site.name')],
-                'image' => $post->cover_image_path ? url(Storage::url($post->cover_image_path)) : null,
+                'image' => $post->cover_image_path ? url(\App\Support\Media::url($post->cover_image_path)) : null,
                 'mainEntityOfPage' => $shareUrl,
             ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
         </script>
@@ -79,7 +79,7 @@
                 @if ($post->cover_image_path)
                     {{-- LCP candidate on a post page. --}}
                     <img
-                        src="{{ Storage::url($post->cover_image_path) }}"
+                        src="{{ \App\Support\Media::url($post->cover_image_path) }}"
                         alt=""
                         fetchpriority="high"
                         decoding="async"

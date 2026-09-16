@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Project;
+use App\Support\Media;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Process;
 
 /**
@@ -111,7 +111,7 @@ class CaptureSiteScreenshots extends Command
         $optimised = $this->optimise($binary);
         $path = "projects/gallery/{$project->slug}-01.webp";
 
-        Storage::disk('public')->put($path, $optimised ?? $binary);
+        Media::put($path, $optimised ?? $binary);
 
         $project->update([
             'gallery' => [$path],

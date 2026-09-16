@@ -41,7 +41,7 @@
                         <figcaption class="mt-6 flex items-center gap-3 border-t border-hairline pt-5">
                             @if ($testimonial->avatar_path)
                                 <img
-                                    src="{{ Storage::url($testimonial->avatar_path) }}"
+                                    src="{{ \App\Support\Media::url($testimonial->avatar_path) }}"
                                     alt=""
                                     loading="lazy"
                                     class="size-10 shrink-0 rounded-full object-cover"
