@@ -69,7 +69,9 @@ return [
     */
 
     'contact' => [
-        'email' => env('SITE_EMAIL', 'cleancodyteam@gmail.com'),
+        // `?:` not env()'s second argument: a key that is present but empty
+        // (SITE_EMAIL= in .env) returns '' rather than falling back.
+        'email' => env('SITE_EMAIL') ?: 'cleancodyteam@gmail.com',
         'phone' => env('SITE_PHONE', '+961 76 928 097'),
         // Digits only, no +, no spaces — wa.me requires that format.
         'whatsapp' => env('SITE_WHATSAPP', '96176928097'),
@@ -152,12 +154,14 @@ return [
     | in lang/{locale}/contact.php.
     |
     | `notify` is where new leads are emailed. Defaults to the public
-    | address so a fresh install still reaches somebody.
+    | address so a fresh install still reaches somebody — including when
+    | LEADS_NOTIFY_EMAIL is present but blank, which is how .env.example
+    | ships it.
     |
     */
 
     'leads' => [
-        'notify' => env('LEADS_NOTIFY_EMAIL', env('SITE_EMAIL', 'cleancodyteam@gmail.com')),
+        'notify' => env('LEADS_NOTIFY_EMAIL') ?: env('SITE_EMAIL') ?: 'cleancodyteam@gmail.com',
 
         'budget_ranges' => ['under-10k', '10k-25k', '25k-60k', 'over-60k', 'unsure'],
 
