@@ -69,7 +69,7 @@ return [
     */
 
     'contact' => [
-        'email' => env('SITE_EMAIL', 'hello@cleancody.com'),
+        'email' => env('SITE_EMAIL', 'cleancodyteam@gmail.com'),
         'phone' => env('SITE_PHONE', '+961 76 928 097'),
         // Digits only, no +, no spaces — wa.me requires that format.
         'whatsapp' => env('SITE_WHATSAPP', '96176928097'),
@@ -157,7 +157,7 @@ return [
     */
 
     'leads' => [
-        'notify' => env('LEADS_NOTIFY_EMAIL', env('SITE_EMAIL', 'hello@cleancody.com')),
+        'notify' => env('LEADS_NOTIFY_EMAIL', env('SITE_EMAIL', 'cleancodyteam@gmail.com')),
 
         'budget_ranges' => ['under-10k', '10k-25k', '25k-60k', 'over-60k', 'unsure'],
 
