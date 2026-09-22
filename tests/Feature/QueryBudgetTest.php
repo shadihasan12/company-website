@@ -42,6 +42,23 @@ class QueryBudgetTest extends TestCase
         ];
     }
 
+    /**
+     * The duplicate-query check has no use for the budget, and PHPUnit warns
+     * when a provider hands a test more arguments than it accepts.
+     *
+     * @return array<string, array{string}>
+     */
+    public static function paths(): array
+    {
+        $paths = [];
+
+        foreach (self::pages() as $name => [$path]) {
+            $paths[$name] = [$path];
+        }
+
+        return $paths;
+    }
+
     #[DataProvider('pages')]
     public function test_a_page_stays_within_its_query_budget(string $path, int $budget): void
     {
@@ -54,7 +71,7 @@ class QueryBudgetTest extends TestCase
         );
     }
 
-    #[DataProvider('pages')]
+    #[DataProvider('paths')]
     public function test_a_page_never_runs_the_same_query_twice(string $path): void
     {
         $duplicates = collect($this->recordQueries($path))
